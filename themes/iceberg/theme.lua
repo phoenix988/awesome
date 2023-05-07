@@ -6,6 +6,7 @@
 --]]
 
 local gears   = require("gears")
+local vicious = require("vicious")
 local lain    = require("lain")
 local awful   = require("awful")
 local wibox   = require("wibox")
@@ -14,7 +15,7 @@ local awesome, client = awesome, client
 local gpmdp   = require("widgets.gpmdp")
 
 local theme                                     = {}
-theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/msjche"
+theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/iceberg"
 -- theme.wallpaper                                 = theme.dir .. "/wall.png"
 theme.font                                      = "Droid Sans 14"
 theme.taglist_font 				= "Xirod 13"
@@ -97,10 +98,10 @@ local red    = "#EB8F8F"
 local green  = "#8FEB8F"
 local white	 = theme.fg_normal
 
-local mytextclock = wibox.widget.textclock(markup("#A093C7", " %a") .. markup("#91ACD1", " %d ") .. markup("#A093C7", "%b ") ..  markup("#91ACD1", "%I:%M "))
+local mytextclock = wibox.widget.textclock(markup("#191724", " %a") .. markup("#161821", " %d ") .. markup("#191724", "%b ") ..  markup("#161821", "%I:%M "))
 mytextclock.font = theme.font
 
---local mytextclock = wibox.container.background(mytextclock, "#B48EAD", gears.shape.rectangle)
+local mytextclock = wibox.container.background(mytextclock, "#425E86", gears.shape.rectangle)
 
 --3uptimewidget = wibox.widget.textbox()
 --3vicious.register(uptimewidget, vicious.widgeet.uptime, (markup(blue, "$1") .. markup(white, " D") .. markup(blue, " $2") ..  markup(white, " h"))
@@ -241,6 +242,10 @@ theme.fs = lain.widget.fs({
 local fsbg = wibox.container.background(fsbar, "#474747", gears.shape.rectangle)
 local fswidget = wibox.container.margin(fsbg, 2, 7, 4, 4)
 
+local fswidget = wibox.container.background(fswidget, "#2E3440", gears.shape.rectangle)
+local fsicon = wibox.container.background(fsicon, "#2E3440", gears.shape.rectangle)
+
+
 -- ALSA volume bar
 local volicon = wibox.widget.imagebox(theme.vol)
 theme.volume = lain.widget.alsabar({
@@ -286,56 +291,111 @@ theme.volume.bar:buttons(awful.util.table.join (
             theme.volume.update()
           end)
 ))
+
 local volumebg = wibox.container.background(theme.volume.bar, "#474747", gears.shape.rectangle)
 local volumewidget = wibox.container.margin(volumebg, 2, 7, 4, 4)
 
+local volumewidget = wibox.container.background(volumewidget, "#282A36", gears.shape.rectangle)
+local volicon = wibox.container.background(volicon, "#282A36", gears.shape.rectangle)
 
+-- Creates cpu widget
 local cpuicon = wibox.widget.imagebox(theme.cpu)
-cpu = lain.widget.cpu({
-    settings = function()
-        widget:set_markup(markup.font(theme.font, " " .. cpu_now.usage .. "% "))
+local cpuwidget = wibox.widget.textbox()
+vicious.register(cpuwidget, vicious.widgets.cpu, "CPU: $1%", 1)
+cpuwidget.font = theme.font
+
+-- Makes the color of the cpu widget
+local cpuwidget = wibox.container.background(cpuwidget, "#282A36")
+local cpuicon = wibox.container.background(cpuicon, "#282A36", gears.shape.rectangle)
+
+-- Makes memory widget
+local memory_widget = lain.widget.mem({
+  settings = function()
+        widget:set_markup(" Mem: " .. mem_now.used .. "MB ")
     end
 })
 
+-- Sets the fon t of the memory widget
+memory_widget.font = theme.font
 
--- Weather
-theme.weather = lain.widget.weather({
-    --city_id = 2643743, -- placeholder (London)
-    city_id = 5570160, -- placeholder (not London)
+
+local weather_widget = lain.widget.weather({
+    city_id = 598316,
+    units = "metric",  -- Use "imperial" for Fahrenheit
+    settings = function()
+        -- Format the weather widget text
+        widget:set_text("Temp: " .. weather_now["main"]["temp"] .. "°C | " .. weather_now["weather"][1]["description"])
+    end
 })
+
 
 -- Separators
 local first     = wibox.widget.textbox(markup.font("Droid Sans 3", " "))
 local spr       = wibox.widget.textbox(' ')
 local spr_big       = wibox.widget.textbox('                        ')
-local small_spr = wibox.widget.textbox(markup.font("Droid Sans 4", " "))
+local small_spr = wibox.widget.textbox(markup.font("Droid Sans 4", "  "))
 local bar_spr   = wibox.widget.textbox(markup.font("Droid Sans 3", " ") .. markup.fontfg(theme.font, "#333333", "  |  ") .. markup.font("Droid Sans 5", " "))
 local bar_spr_small   = wibox.widget.textbox(markup.font("Droid Sans 28", "") .. markup.fontfg(theme.font, "#333333", " ", "Droid Sans 20") .. markup.font("Droid Sans 12", " "))
 local bar_spr_middle   = wibox.widget.textbox(markup.font("Droid Sans 20", " ") .. markup.fontfg(theme.font, "#161821", "                         ") .. markup.font("Droid Sans 5", " "))
--- local linux_icon   = wibox.widget.textbox(markup.font("Droid Sans 13",  "") .. markup.fontbg(theme.font,white, "") .. markup.fontfg(theme.font,"#000000") )
 
 local linux_icon =  wibox.widget {
-     markup = '<span foreground="#EB8F8F" background="#161821" font="Droid Sans 12"></span>',
+     markup = '<span foreground="#EB8F8F" font="Droid Sans 14"></span>',
      widget = wibox.widget.textbox
 }
 
-local arrow_bg = wibox.widget {
-     markup = '<span foreground="#161821" background="#B48EAD" font="FiraCode Nerd Font Mono 20">›</span>',
+local linux_icon = wibox.container.background(linux_icon, "#161821", gears.shape.rectangle)
+
+local col_bg =  wibox.widget {
+     markup = '<span background="#161821" font="Droid Sans 25">  </span>',
      widget = wibox.widget.textbox
 }
 
-local arrow_fg = wibox.widget {
-     markup = '<span foreground="#B48EAD" background="#161821" font="FiraCode Nerd Font Mono 20">›</span>',
-     margin = -10,
-     widget = wibox.widget.textbox
-}
-local triangle = wibox.widget {
-     markup = '<span foreground="#91ACD1" background="#161821" font="FiraCode Nerd Font Mono 12">|</span>',
-     widget = wibox.widget.textbox
+-- powerline seperators
+local seperator = wibox.widget {
+     markup = '<span foreground="#425E86"  font="FiraCode Nerd Font Mono 38"></span>',
+     widget = wibox.widget.textbox,
 }
 
-local separator = ""  -- Unicode character U+E0B0
+local seperator_dif = wibox.widget {
+     markup = '<span foreground="#161821" background="#425E86" font="FiraCode Nerd Font Mono 38"></span>',
+     widget = wibox.widget.textbox,
+}
 
+
+local seperator_col = wibox.widget {
+     markup = '<span foreground="#161821" background="#282A36" font="FiraCode Nerd Font Mono 38"></span>',
+     widget = wibox.widget.textbox,
+}
+
+local seperator_col_dif = wibox.widget {
+     markup = '<span foreground="#282A36" background="#161821" font="FiraCode Nerd Font Mono 38"></span>',
+     widget = wibox.widget.textbox,
+}
+
+local seperator_fs = wibox.widget {
+     markup = '<span foreground="#2E3440" background="#161821" font="FiraCode Nerd Font Mono 38"></span>',
+     widget = wibox.widget.textbox,
+}
+
+local seperator_fs_diff = wibox.widget {
+     markup = '<span foreground="#161821" background="#2E3440" font="FiraCode Nerd Font Mono 38"></span>',
+     widget = wibox.widget.textbox,
+}
+
+local seperator_black = wibox.widget {
+     markup = '<span foreground="#161821"  font="FiraCode Nerd Font Mono 38"></span>',
+     widget = wibox.widget.textbox,
+}
+
+
+local seperator = wibox.container.margin(seperator)
+seperator:set_right(-1)
+
+local seperator_col = wibox.container.margin(seperator_col)
+seperator_col:set_right(-4)
+
+local seperator_dif = wibox.container.margin(seperator_dif)
+seperator_dif:set_left(0)
 
 -- Eminent-like task filtering
 local orig_filter = awful.widget.taglist.filter.all
@@ -362,7 +422,7 @@ function theme.at_screen_connect(s)
     --awful.tag(awful.util.tagnames, s, awful.layout.layouts)
 	local names = { "", "", "", "", "", "", "", "", "" }
 	local l = awful.layout.suit
-	local layouts = { l.max, l.fair.horizontal, l.spiral, l.corner.se, l.tile.bottom, l.corner.se, l.magnifier, l.floating, l.floating, }
+	local layouts = { l.max, l.tile.right, l.spiral, l.corner.se, l.tile.bottom, l.corner.se, l.tile.right, l.floating, l.floating, }
 	awful.tag(names, s, layouts)
 
     -- Create a promptbox for each screen
@@ -379,13 +439,28 @@ function theme.at_screen_connect(s)
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
 
+
+
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
+    s.mytasklist = wibox.container.background(s.mytasklist, "#00000000")
+
     local bar_gap = 10
+    local screen_geometry = awful.screen.focused().geometry
+    
+    -- Calculate the width for the widget bar (25% of the screen width)
+    local widget_bar_width = screen_geometry.width * 0.40
+
 
     -- Create the horizontal wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = 25, bg = theme.bg_normal, fg = theme.fg_normal, y = bar_gap })
+    s.mywibox = awful.wibar({ position = "top", 
+    screen = s, 
+    height = 25, 
+    bg = theme.bg_normal, 
+    fg = theme.fg_normal, 
+    y = screen_geometry.y,
+    x = screen_geometry.x,})
 
 
     -- Add widgets to the wibox
@@ -396,29 +471,26 @@ function theme.at_screen_connect(s)
             layout = wibox.layout.fixed.horizontal,
             small_spr,
             s.mylayoutbox,
+            bar_spr,
             first,
-            bar_spr,
             s.mytaglist,
-            bar_spr,
             first,
             s.mypromptbox,
+            spr_big,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             spr_big,
+            memory_widget,
+            small_spr,
+            seperator,
             mytextclock,
-            spr_big,
-            triangle,
-            spr,
-            spr,
-            spr,
-            spr,
-            spr,
-            spr,
-            cpuicon,
-            cpu,
-            bar_spr,
+            seperator_dif,
+            seperator_col_dif,
+--            cpuicon,
+            cpuwidget,
+            seperator_col,
             --mail.widget,
 --	    brightness.widget,
 	    gpmdp.widget,
@@ -427,29 +499,17 @@ function theme.at_screen_connect(s)
             --baticon,
             --batwidget,
             --bar_spr,
+            seperator_fs,
             fsicon,
             fswidget,
+            seperator_fs_diff,
+            seperator_col_dif,
             volicon,
             volumewidget,
-            spr,
-            spr,
-            spr,
-            bar_spr,
-            spr,
-            spr,
-            spr,
+            seperator_col,
+            col_bg,
             wibox.widget.systray(),
-            spr,
-            spr,
-            spr,
-            spr,
-            spr,
-            triangle,
-            spr,
-            spr,
-            spr,
-            spr,
-            spr,
+            col_bg,
             linux_icon,
             first,
         },

@@ -60,7 +60,7 @@ run_once({ "unclutter -root" }) -- entries must be comma-separated
 -- }}}
 
 -- {{{ Variable definitions
-local chosen_theme = "msjche"
+local chosen_theme = "iceberg"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "kitty"
@@ -382,6 +382,10 @@ globalkeys = awful.util.table.join(
               {description = "run dm-kittychangetheme", group = "dmenu"}),
     awful.key({ altkey }, "w", function () awful.util.spawn("/home/karl/.dmenu/dm-set-wallpaper") end,
               {description = "run dm-set-wallpaper", group = "dmenu"}),
+    awful.key({ altkey }, "j", function () awful.util.spawn("/home/karl/.dmenu/dm-pass") end,
+              {description = "run dm-pass", group = "dmenu"}),
+    awful.key({ altkey }, "q", function () awful.util.spawn("/home/karl/.dmenu/dm-virt-manager") end,
+              {description = "run dm-pass", group = "dmenu"}),
 
     awful.key({ modkey, "Control" }, "n",
               function ()
