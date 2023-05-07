@@ -291,27 +291,34 @@ theme.volume.bar:buttons(awful.util.table.join (
             theme.volume.update()
           end)
 ))
+
 local volumebg = wibox.container.background(theme.volume.bar, "#474747", gears.shape.rectangle)
 local volumewidget = wibox.container.margin(volumebg, 2, 7, 4, 4)
 
 local volumewidget = wibox.container.background(volumewidget, "#282A36", gears.shape.rectangle)
 local volicon = wibox.container.background(volicon, "#282A36", gears.shape.rectangle)
 
+-- Creates cpu widget
 local cpuicon = wibox.widget.imagebox(theme.cpu)
-
 local cpuwidget = wibox.widget.textbox()
 vicious.register(cpuwidget, vicious.widgets.cpu, "CPU: $1%", 1)
 cpuwidget.font = theme.font
 
+-- Makes the color of the cpu widget
 local cpuwidget = wibox.container.background(cpuwidget, "#282A36")
 local cpuicon = wibox.container.background(cpuicon, "#282A36", gears.shape.rectangle)
 
+local memory_widget = lain.widget.mem({})
 
--- Weather
-theme.weather = lain.widget.weather({
-    --city_id = 2643743, -- placeholder (London)
-    city_id = 5570160, -- placeholder (not London)
+local weather_widget = lain.widget.weather({
+    city_id = 598316,
+    units = "metric",  -- Use "imperial" for Fahrenheit
+    settings = function()
+        -- Format the weather widget text
+        widget:set_text("Temp: " .. weather_now["main"]["temp"] .. "°C | " .. weather_now["weather"][1]["description"])
+    end
 })
+
 
 -- Separators
 local first     = wibox.widget.textbox(markup.font("Droid Sans 3", " "))
@@ -488,6 +495,7 @@ function theme.at_screen_connect(s)
             volicon,
             volumewidget,
             seperator_col,
+            col_bg,
             wibox.widget.systray(),
             col_bg,
             col_bg,
