@@ -223,6 +223,8 @@ globalkeys = awful.util.table.join(
         {description="run xscreensaver", group="Applications"}),
 	awful.key({ modkey, "Shift" }, "v", function () awful.util.spawn( "virt-manager" ) end,
         {description="run virt-manager", group="Applications"}),
+	awful.key({ modkey,}, "i", function () awful.util.spawn( "lxappearance" ) end,
+        {description="run lxappearance", group="Applications"}),
 
 
     -- Hotkeys
@@ -376,6 +378,8 @@ globalkeys = awful.util.table.join(
               {description = "run dm-kill", group = "dmenu"}),
     awful.key({ altkey }, "t", function () awful.util.spawn("/home/karl/.dmenu/dm-kittychangetheme") end,
               {description = "run dm-kittychangetheme", group = "dmenu"}),
+    awful.key({ altkey }, "w", function () awful.util.spawn("/home/karl/.dmenu/dm-set-wallpaper") end,
+              {description = "run dm-set-wallpaper", group = "dmenu"}),
 
     awful.key({ modkey, "Control" }, "n",
               function ()
@@ -394,7 +398,7 @@ globalkeys = awful.util.table.join(
     -- Widgets popups
     awful.key({ altkey, }, "c", function () lain.widget.calendar.show(7) end),
     awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end),
-    awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end),
+    awful.key({ altkey, "Control" }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end),
 
     -- Brightness
     awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight -inc 10") end),
