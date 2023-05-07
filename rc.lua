@@ -65,9 +65,9 @@ local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "kitty"
 local editor       = os.getenv("EDITOR") or "nvim"
-local gui_editor   = "emacsclient -c emacs"
+local gui_editor   = "emacsclient -c -a emacs"
 local browser      = "librewolf"
-local guieditor    = "emacsclient -c emacs"
+local guieditor    = "emacsclient -c -a emacs"
 
 awful.util.terminal = terminal
 
@@ -225,6 +225,8 @@ globalkeys = awful.util.table.join(
         {description="run virt-manager", group="Applications"}),
 	awful.key({ modkey,}, "i", function () awful.util.spawn( "lxappearance" ) end,
         {description="run lxappearance", group="Applications"}),
+	awful.key({ altkey, "Control" }, "p", function () awful.util.spawn( "pavucontrol" ) end,
+        {description="run pavucontrol", group="Applications"}),
 
 
     -- Hotkeys
@@ -625,6 +627,9 @@ awful.rules.rules = {
 
        { rule = { class = "LibreWolf" },
         properties = { screen = 1, tag = "" } },
+
+       { rule = { class = "Steam" },
+        properties = { screen = 1, tag = "" } },
 
     { rule = { class = "Gimp", role = "gimp-image-window" },
           properties = { maximized = true } },
