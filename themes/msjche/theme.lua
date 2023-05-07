@@ -330,7 +330,7 @@ local bar_spr_small   = wibox.widget.textbox(markup.font("Droid Sans 28", "")
 local bar_spr_middle   = wibox.widget.textbox(markup.font("Droid Sans 20", " ") .. markup.fontfg(theme.font, "#161821", "                         ") .. markup.font("Droid Sans 5", " "))
 
 local linux_icon =  wibox.widget {
-     markup = '<span foreground="#EB8F8F" font="Droid Sans 18"></span>',
+     markup = '<span foreground="#EB8F8F" font="Droid Sans 14"></span>',
      widget = wibox.widget.textbox
 }
 
@@ -343,38 +343,38 @@ local col_bg =  wibox.widget {
 
 -- powerline seperators
 local seperator = wibox.widget {
-     markup = '<span foreground="#425E86"  font="FiraCode Nerd Font Mono 18"></span>',
+     markup = '<span foreground="#425E86"  font="FiraCode Nerd Font Mono 38"></span>',
      widget = wibox.widget.textbox,
 }
 
 local seperator_dif = wibox.widget {
-     markup = '<span foreground="#161821" background="#425E86" font="FiraCode Nerd Font Mono 18"></span>',
+     markup = '<span foreground="#161821" background="#425E86" font="FiraCode Nerd Font Mono 38"></span>',
      widget = wibox.widget.textbox,
 }
 
 
 local seperator_col = wibox.widget {
-     markup = '<span foreground="#161821" background="#282A36" font="FiraCode Nerd Font Mono 18"></span>',
+     markup = '<span foreground="#161821" background="#282A36" font="FiraCode Nerd Font Mono 38"></span>',
      widget = wibox.widget.textbox,
 }
 
 local seperator_col_dif = wibox.widget {
-     markup = '<span foreground="#282A36" background="#161821" font="FiraCode Nerd Font Mono 18"></span>',
+     markup = '<span foreground="#282A36" background="#161821" font="FiraCode Nerd Font Mono 38"></span>',
      widget = wibox.widget.textbox,
 }
 
 local seperator_fs = wibox.widget {
-     markup = '<span foreground="#2E3440" background="#161821" font="FiraCode Nerd Font Mono 18"></span>',
+     markup = '<span foreground="#2E3440" background="#161821" font="FiraCode Nerd Font Mono 38"></span>',
      widget = wibox.widget.textbox,
 }
 
 local seperator_fs_diff = wibox.widget {
-     markup = '<span foreground="#161821" background="#2E3440" font="FiraCode Nerd Font Mono 18"></span>',
+     markup = '<span foreground="#161821" background="#2E3440" font="FiraCode Nerd Font Mono 38"></span>',
      widget = wibox.widget.textbox,
 }
 
 local seperator_black = wibox.widget {
-     markup = '<span foreground="#161821"  font="FiraCode Nerd Font Mono 18"></span>',
+     markup = '<span foreground="#161821"  font="FiraCode Nerd Font Mono 38"></span>',
      widget = wibox.widget.textbox,
 }
 
@@ -462,6 +462,7 @@ function theme.at_screen_connect(s)
             layout = wibox.layout.fixed.horizontal,
             small_spr,
             s.mylayoutbox,
+            bar_spr,
             first,
             s.mytaglist,
             first,
@@ -476,7 +477,7 @@ function theme.at_screen_connect(s)
             mytextclock,
             seperator_dif,
             seperator_col_dif,
-            cpuicon,
+--            cpuicon,
             cpuwidget,
             seperator_col,
             --mail.widget,
@@ -497,7 +498,6 @@ function theme.at_screen_connect(s)
             seperator_col,
             col_bg,
             wibox.widget.systray(),
-            col_bg,
             col_bg,
             linux_icon,
             first,
