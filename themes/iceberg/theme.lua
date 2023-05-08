@@ -19,7 +19,7 @@ theme.dir                                       = os.getenv("HOME") .. "/.config
 -- theme.wallpaper                                 = theme.dir .. "/wall.png"
 theme.font                                      = "Droid Sans 14"
 theme.taglist_font 				= "Xirod 13"
-theme.fg_normal                                 = "#B48EAD"
+theme.fg_normal                                 = "#91ACD1"
 theme.fg_focus                                  = "#A093C7"
 theme.bg_normal                                 = "#161821"
 theme.bg_normal                                 = "#161821"
@@ -311,11 +311,11 @@ local cpuicon = wibox.container.background(cpuicon, "#282A36", gears.shape.recta
 -- Makes memory widget
 local memory_widget = lain.widget.mem({
   settings = function()
-        widget:set_markup(" Mem: " .. mem_now.used .. "MB ")
+        widget:set_markup( "MEM: " .. mem_now.used .. "MB ")
     end
 })
 
--- Sets the fon t of the memory widget
+-- Sets the font of the memory widget
 memory_widget.font = theme.font
 
 
@@ -482,11 +482,12 @@ function theme.at_screen_connect(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             spr_big,
-            memory_widget,
             small_spr,
             seperator,
             mytextclock,
             seperator_dif,
+            memory_widget,
+            col_bg,
             seperator_col_dif,
 --            cpuicon,
             cpuwidget,
