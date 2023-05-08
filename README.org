@@ -3,7 +3,7 @@
 #+AUTHOR: Karl Fredin
 
 
-[[file:./.images/awesome.png ]]
+[[file:./.images/awesome.png]]
 
 * DEPENDENCIES:
 ** ARCH
