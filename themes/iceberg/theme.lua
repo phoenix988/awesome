@@ -6,7 +6,6 @@
 --]]
 
 local gears   = require("gears")
-local vicious = require("vicious")
 local lain    = require("lain")
 local awful   = require("awful")
 local wibox   = require("wibox")
@@ -108,8 +107,6 @@ mytextclock.font = theme.font
 -- Set the bg color of the clock widget
 local mytextclock = wibox.container.background(mytextclock, theme.fg_clock, gears.shape.rectangle)
 
---uptimewidget = wibox.widget.textbox()
---vicious.register(uptimewidget, vicious.widgeet.uptime, (markup(blue, "$1") .. markup(white, " D") .. markup(blue, " $2") ..  markup(white, " h"))
 
 -- Calendar
 lain.widget.calendar({
@@ -490,7 +487,7 @@ function theme.at_screen_connect(s)
     --awful.tag(awful.util.tagnames, s, awful.layout.layouts)
 	local names = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
 	local l = awful.layout.suit
-	local layouts = { l.max, l.tile.right, l.spiral, l.max, l.tile.bottom, l.corner.se, l.tile.right, l.floating, l.floating, }
+	local layouts = { l.max, l.tile.right, l.tile.right, l.max, l.tile.right, l.tile.right, l.tile.right, l.floating, l.floating, }
 	awful.tag(names, s, layouts)
 
     -- Create a promptbox for each screen
@@ -507,29 +504,17 @@ function theme.at_screen_connect(s)
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
 
-
-
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
     s.mytasklist = wibox.container.background(s.mytasklist, "#00000000")
-
-    local bar_gap = 10
-    local screen_geometry = awful.screen.focused().geometry
-    
-    -- Calculate the width for the widget bar (25% of the screen width)
-    local widget_bar_width = screen_geometry.width * 0.40
-
 
     -- Create the horizontal wibox
     s.mywibox = awful.wibar({ position = "top", 
     screen = s, 
     height = 25, 
     bg = theme.bg_normal, 
-    fg = theme.fg_normal, 
-    y = screen_geometry.y,
-    x = screen_geometry.x,})
-
+    fg = theme.fg_normal })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -560,10 +545,6 @@ function theme.at_screen_connect(s)
             cpuicon,
             cpuwidget,
             seperator_col,
-           -- mail.widget,
- 	   -- brightness.widget,
-	   -- gpmdp.widget,
-           -- mpdicon,
             theme.mpd.widget,
            -- baticon,
            -- batwidget,

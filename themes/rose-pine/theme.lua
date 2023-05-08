@@ -6,7 +6,6 @@
 --]]
 
 local gears   = require("gears")
-local vicious = require("vicious")
 local lain    = require("lain")
 local awful   = require("awful")
 local wibox   = require("wibox")
@@ -107,9 +106,6 @@ mytextclock.font = theme.font
 
 -- Set the bg color of the clock widget
 local mytextclock = wibox.container.background(mytextclock, theme.fg_clock, gears.shape.rectangle)
-
---uptimewidget = wibox.widget.textbox()
---vicious.register(uptimewidget, vicious.widgeet.uptime, (markup(blue, "$1") .. markup(white, " D") .. markup(blue, " $2") ..  markup(white, " h"))
 
 -- Calendar
 lain.widget.calendar({
@@ -394,7 +390,7 @@ local weather_widget = lain.widget.weather({
 })
 
 
--- Separators
+-- separators
 local first     = wibox.widget.textbox(markup.font("Droid Sans 3", " "))
 local spr       = wibox.widget.textbox(' ')
 local spr_big       = wibox.widget.textbox('                        ')
@@ -406,7 +402,6 @@ local bar_spr_middle   = wibox.widget.textbox(markup.font("Droid Sans 20", " ") 
 local linux_icon =  wibox.widget {
      markup = '<span foreground="#F6C177" font="Droid Sans 14"></span>',
      widget = wibox.widget.textbox
-
 }
 
 local linux_icon = wibox.container.background(linux_icon, theme.bg_normal, gears.shape.rectangle)
@@ -453,7 +448,6 @@ local seperator_black = wibox.widget {
      widget = wibox.widget.textbox,
 }
 
-
 local seperator = wibox.container.margin(seperator)
 seperator:set_right(-1)
 
@@ -462,7 +456,6 @@ seperator_col:set_right(-4)
 
 local seperator_dif = wibox.container.margin(seperator_dif)
 seperator_dif:set_left(0)
-
 -- Seperator end
 
 -- Eminent-like task filtering
@@ -507,28 +500,17 @@ function theme.at_screen_connect(s)
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
 
-
-
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
     s.mytasklist = wibox.container.background(s.mytasklist, "#00000000")
-
-    local bar_gap = 10
-    local screen_geometry = awful.screen.focused().geometry
-    
-    -- Calculate the width for the widget bar (25% of the screen width)
-    local widget_bar_width = screen_geometry.width * 0.40
-
 
     -- Create the horizontal wibox
     s.mywibox = awful.wibar({ position = "top", 
     screen = s, 
     height = 25, 
     bg = theme.bg_normal, 
-    fg = theme.fg_normal, 
-    y = screen_geometry.y,
-    x = screen_geometry.x,})
+    fg = theme.fg_normal })
 
 
     -- Add widgets to the wibox
