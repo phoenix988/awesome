@@ -1,0 +1,39 @@
+#+title: AWESOME
+#+DESCRIPTION: My awesome configuration
+#+AUTHOR: Karl Fredin
+
+
+[[file:./.images/awesome.png ]]
+
+* DEPENDENCIES:
+** ARCH
+#+begin_src sh
+
+pacman -S awesome rofi fzf
+
+# clones my repositories
+git clone https://github.com/phoenix988/dotfiles.git $HOME/dotfiles
+git clone https://github.com/phoenix988/dmscripts.git $HOME/dmscripts
+
+# if you have your own scripts dont just run this if yoou dont have backups
+rm -rf $HOME/.scripts
+cp -r $HOME/dotfiles/.config/rofi $HOME/.config
+cp -r $HOME/dotfiles/.scripts $HOME/.scripts
+
+# moves my dmenu scripts to correct directory
+rm -rf $HOME/.dmenu
+cp -r $HOME/dmscripts/.dmenu $HOME/.dmenu
+
+#+end_src
+
+
+* INSTALLATION:
+#+begin_src sh
+
+# remove old awessome config (dont forget to backup)
+rm -rf $HOME/.config/awesome
+
+# clone my repository
+git clone https://github.com/phoenix988/awesome.git $HOME/.config/awesome
+
+#+end_src
