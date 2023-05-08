@@ -33,7 +33,7 @@ theme.bg_urgent                                 = "#E98989"
 theme.border_width                              = 2
 theme.border_normal                             = "#161821"
 theme.border_focus                              = "#A093C7"
-theme.taglist_fg_focus                          = "#91ACD1"
+theme.taglist_fg_focus                          = "#E9B189"
 theme.taglist_bg_focus                          = "#161821"
 theme.taglist_bg_normal                         = "#161821"
 theme.titlebar_bg_normal                        = "#161821"
@@ -488,9 +488,9 @@ function theme.at_screen_connect(s)
 
     -- Tag names and layouts
     --awful.tag(awful.util.tagnames, s, awful.layout.layouts)
-	local names = { "", "", "", "", "", "", "", "", "" }
+	local names = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
 	local l = awful.layout.suit
-	local layouts = { l.max, l.tile.right, l.spiral, l.corner.se, l.tile.bottom, l.corner.se, l.tile.right, l.floating, l.floating, }
+	local layouts = { l.max, l.tile.right, l.spiral, l.max, l.tile.bottom, l.corner.se, l.tile.right, l.floating, l.floating, }
 	awful.tag(names, s, layouts)
 
     -- Create a promptbox for each screen
