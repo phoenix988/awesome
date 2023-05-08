@@ -219,8 +219,6 @@ globalkeys = awful.util.table.join(
         {description="run qutebrowser", group="Applications"}),
 	awful.key({ modkey, "Shift" }, "b", function () awful.util.spawn( "firefox-bin" ) end,
         {description="run firefox", group="Applications"}),
-	awful.key({ modkey, "Shift" }, "k", function () awful.util.spawn( "xscreensaver-command -lock" ) end,
-        {description="run xscreensaver", group="Applications"}),
 	awful.key({ modkey, "Shift" }, "v", function () awful.util.spawn( "virt-manager" ) end,
         {description="run virt-manager", group="Applications"}),
 	awful.key({ modkey,}, "i", function () awful.util.spawn( "lxappearance" ) end,
