@@ -751,4 +751,3 @@ awful.spawn.with_shell("~/.fehbg")
 
 
 beautiful.useless_gap = 5
-

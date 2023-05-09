@@ -15,7 +15,7 @@ local gpmdp   = require("widgets.gpmdp")
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/iceberg"
--- theme.wallpaper                                 = theme.dir .. "/wall.png"
+theme.wallpaper                                 = theme.dir .. "/wall.png"
 theme.font                                      = "Droid Sans 14"
 theme.taglist_font 				= "Xirod 13"
 theme.fg_normal                                 = "#91ACD1"
@@ -31,7 +31,7 @@ theme.fg_urgent                                 = "#161821"
 theme.bg_alt                                    = "#191724"
 theme.bg_urgent                                 = "#E98989"
 theme.border_width                              = 2
-theme.border_normal                             = "#161821"
+theme.border_normal                             = "#91ACD1"
 theme.border_focus                              = "#A093C7"
 theme.taglist_fg_focus                          = "#E9B189"
 theme.taglist_bg_focus                          = "#161821"
@@ -107,7 +107,7 @@ local green  = "#8FEB8F"
 local white	 = theme.fg_normal
 
 -- Make the clock widget
-local mytextclock = wibox.widget.textclock(markup(theme.bg_normal, " %a") .. markup(theme.bg_alt, " %d ") .. markup(theme.bg_normal, "%b ") ..  markup(theme.bg_alt, "%I:%M "))
+local mytextclock = wibox.widget.textclock(markup(theme.bg_normal, "  %a") .. markup(theme.bg_alt, " %d ") .. markup(theme.bg_normal, "%b ") ..  markup(theme.bg_alt, "%I:%M "))
 mytextclock.font = theme.font
 
 -- Set the bg color of the clock widget
@@ -336,7 +336,7 @@ local volicon = wibox.container.background(volicon, theme.seperator_2 , gears.sh
 local cpufont = "Droid Sans 10"
 
 local cpuicon =  wibox.widget {
-     markup = "<span foreground='" .. theme.fg_cpu .. "' font='" .. cpufont .. "'>⧗</span>",
+     markup = "<span foreground='" .. theme.fg_cpu .. "' font='" .. cpufont .. "'></span>",
      widget = wibox.widget.textbox
 }
 
@@ -593,10 +593,10 @@ function theme.at_screen_connect(s)
         wallpaper = wallpaper(s)
     end
     gears.wallpaper.maximized(wallpaper, s, true)
-
+    
     -- Tag names and layouts
     --awful.tag(awful.util.tagnames, s, awful.layout.layouts)
-	local names = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
+	local names = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
 	local l = awful.layout.suit
 	local layouts = { l.max, l.tile.right, l.tile.right, l.max, l.tile.right, l.tile.right, l.tile.right, l.floating, l.floating, }
 	awful.tag(names, s, layouts)

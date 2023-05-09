@@ -337,8 +337,9 @@ local volicon = wibox.container.background(volicon, theme.seperator_2 , gears.sh
 
 local cpufont = "Droid Sans 10"
 
+
 local cpuicon =  wibox.widget {
-     markup = "<span foreground='" .. theme.fg_cpu .. "' font='" .. cpufont .. "'>⧗</span>",
+     markup = "<span foreground='" .. theme.fg_cpu .. "' font='" .. cpufont .. "'></span>",
      widget = wibox.widget.textbox
 }
 
@@ -598,7 +599,7 @@ function theme.at_screen_connect(s)
 
     -- Tag names and layouts
     --awful.tag(awful.util.tagnames, s, awful.layout.layouts)
-	local names = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
+	local names = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
 	local l = awful.layout.suit
 	local layouts = { l.max, l.tile.right, l.tile.right, l.max, l.tile.right, l.tile.right, l.tile.right, l.floating, l.floating, }
 	awful.tag(names, s, layouts)
