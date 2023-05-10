@@ -332,14 +332,14 @@ local volicon = wibox.container.background(volicon, theme.seperator_2 , gears.sh
 -- volume widget end
 
 -- Creates cpu widget
---local cpuicon = wibox.widget.imagebox(theme.cpu)
+local cpuicon = wibox.widget.imagebox(theme.cpu)
 
-local cpufont = "Droid Sans 10"
-
-local cpuicon =  wibox.widget {
-     markup = "<span foreground='" .. theme.fg_cpu .. "' font='" .. cpufont .. "'></span>",
-     widget = wibox.widget.textbox
-}
+--local cpufont = "Droid Sans 10"
+--
+--local cpuicon =  wibox.widget {
+--     markup = "<span foreground='" .. theme.fg_cpu .. "' font='" .. cpufont .. "'></span>",
+--     widget = wibox.widget.textbox
+--}
 
 local tempfont = "Droid Sans 7"
 
@@ -439,7 +439,7 @@ local cpuwidget = wibox.container.margin(cpubg, 2, 7, 4, 4)
 -- makes the colour of the cpu widget
 local cpuwidget = wibox.container.background(cpuwidget, theme.seperator_2 , gears.shape.rectangle)
 
-local cpuicon = wibox.container.margin(cpuicon, 10, 7, 4, 4)
+local cpuicon = wibox.container.margin(cpuicon, 2, 2, 2, 2)
 local cpuicon = wibox.container.background(cpuicon, theme.seperator_2 , gears.shape.rectangle)
 
 local tempicon = wibox.container.margin(tempicon, 8, 7, 4, 0)
