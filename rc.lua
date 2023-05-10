@@ -629,20 +629,16 @@ awful.rules.rules = {
       properties = { titlebars_enabled = false } },
 --      properties = { titlebars_enabled = true } },
 
-    -- Set Firefox to always map on the first tag on screen 1.
---    { rule = { class = "Librewolf" },
---      properties = { screen = 1, tag = awful.util.names["1"] } },
-
        { rule = { class = "LibreWolf" },
         properties = {tag = " " } },
 
        { rule = { class = "Steam" },
         properties = {tag = " " } },
 
-    { rule = { class = "gimp-2.10", role = "gimp-image-window" },
+    { rule = { class = "gimp-2.10" },
           properties = { maximized = true, tag = " " } },
 
-    { rule = { class = "Yad", role = "yad" },
+    { rule = { class = "Yad" },
           properties = { float = true } },
 
 
