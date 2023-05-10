@@ -2,15 +2,12 @@
 #+DESCRIPTION: My awesome configuration
 #+AUTHOR: Karl Fredin
 
-
 [[file:./.images/awesome.png]]
 
 * DEPENDENCIES:
 ** ARCH
 #+begin_src sh
-
-pacman -S awesome rofi fzf ttf-jetbrains-mono ttf-jetbrains-mono-nerd noto-fonts ttf-iosevka-nerd
-
+pacman -S awesome rofi fzf ttf-jetbrains-mono ttf-jetbrains-mono-nerd noto-fonts ttf-iosevka-nerd awesome-terminal-fonts
 
 # clones my repositories
 git clone https://github.com/phoenix988/dotfiles.git $HOME/dotfiles
@@ -24,17 +21,25 @@ cp -r $HOME/dotfiles/.scripts $HOME/.scripts
 # moves my dmenu scripts to correct directory
 rm -rf $HOME/.dmenu
 cp -r $HOME/dmscripts/.dmenu $HOME/.dmenu
+#+end_src
 
+*** OPTIONAL
+If you want to install a bunch of fonts that can come in handy
+you can clone my repo wher I store a collection of fonts I use for my configs
+#+begin_src sh
+# Here you clone them to your user folder
+git clone https://github.com/phoenix988/fonts.git $HOME/.local/share/fonts
+
+# But you can also choose to move them to /usrr/share/fonts to make it systemwide
+sudo cp -r $HOME/fonts/* /usr/share/fonts
 #+end_src
 
 
 * INSTALLATION:
 #+begin_src sh
-
-# remove old awessome config (dont forget to backup)
+# remove old awesome config (dont forget to backup)
 rm -rf $HOME/.config/awesome
 
 # clone my repository
 git clone https://github.com/phoenix988/awesome.git $HOME/.config/awesome
-
 #+end_src
