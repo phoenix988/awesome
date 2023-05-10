@@ -634,10 +634,10 @@ awful.rules.rules = {
 --      properties = { screen = 1, tag = awful.util.names["1"] } },
 
        { rule = { class = "LibreWolf" },
-        properties = { screen = 1, tag = " " } },
+        properties = {tag = " " } },
 
        { rule = { class = "Steam" },
-        properties = { screen = 1, tag = " " } },
+        properties = {tag = " " } },
 
     { rule = { class = "gimp-2.10", role = "gimp-image-window" },
           properties = { maximized = true, tag = " " } },
