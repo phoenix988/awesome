@@ -9,7 +9,8 @@
 ** ARCH
 #+begin_src sh
 
-pacman -S awesome rofi fzf
+pacman -S awesome rofi fzf ttf-jetbrains-mono ttf-jetbrains-mono-nerd
+
 
 # clones my repositories
 git clone https://github.com/phoenix988/dotfiles.git $HOME/dotfiles

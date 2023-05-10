@@ -107,8 +107,9 @@ local green  = "#8FEB8F"
 local white	 = theme.fg_normal
 
 -- Make the clock widget
-local mytextclock = wibox.widget.textclock(markup(theme.bg_normal, "  %a") .. markup(theme.bg_alt, " %d ") .. markup(theme.bg_normal, "%b ") ..  markup(theme.bg_alt, "%I:%M "))
-mytextclock.font = theme.font
+local mytextclock = wibox.widget.textclock(markup(theme.bg_normal, "  %a") .. markup(theme.bg_alt, " %d ") .. markup(theme.bg_normal, "%b ") .. markup(theme.bg_alt, "  🕰  %I:%M "))
+mytextclock.font = "JetBrains Mono Nerd 12"
+local mytextclock = wibox.container.margin(mytextclock, 1, 1, 7, 1)
 
 -- Set the bg color of the clock widget
 local mytextclock = wibox.container.background(mytextclock, theme.fg_clock, gears.shape.rectangle)
@@ -149,28 +150,28 @@ local mail = lain.widget.imap({
 --]]
 
 -- MPD
-local mpdicon = wibox.widget.imagebox()
-theme.mpd = lain.widget.mpd({
-    settings = function()
-        if mpd_now.state == "play" then
-            title = mpd_now.title
-            artist  = " " .. mpd_now.artist  .. markup("#333333", " <span font='Droid Sans 2'> </span>|<span font='Droid Sans 5'> </span>")
-            mpdicon:set_image(theme.play)
-        elseif mpd_now.state == "pause" then
-            title = "mpd "
-            artist  = "paused" .. markup("#333333", " |<span font='Droid Sans 5'> </span>")
-            mpdicon:set_image(theme.pause)
-        else
-            title  = ""
-            artist = ""
-            mpdicon._private.image = nil
-            mpdicon:emit_signal("widget::redraw_needed")
-            mpdicon:emit_signal("widget::layout_changed")
-        end
-
-        widget:set_markup(markup.font(theme.font, markup(blue, title) .. artist))
-    end
-})
+--local mpdicon = wibox.widget.imagebox()
+--theme.mpd = lain.widget.mpd({
+--    settings = function()
+--        if mpd_now.state == "play" then
+--            title = mpd_now.title
+--            artist  = " " .. mpd_now.artist  .. markup("#333333", " <span font='Droid Sans 2'> </span>|<span font='Droid Sans 5'> </span>")
+--            mpdicon:set_image(theme.play)
+--        elseif mpd_now.state == "pause" then
+--            title = "mpd "
+--            artist  = "paused" .. markup("#333333", " |<span font='Droid Sans 5'> </span>")
+--            mpdicon:set_image(theme.pause)
+--        else
+--            title  = ""
+--            artist = ""
+--            mpdicon._private.image = nil
+--            mpdicon:emit_signal("widget::redraw_needed")
+--            mpdicon:emit_signal("widget::layout_changed")
+--        end
+--
+--        widget:set_markup(markup.font(theme.font, markup(blue, title) .. artist))
+--    end
+--})
 
 -- MPD widget end
 
@@ -659,7 +660,6 @@ function theme.at_screen_connect(s)
             tempwidget,
             temp_text,
             seperator_col,
-            theme.mpd.widget,
            -- baticon,
            -- batwidget,
            -- bar_spr,
