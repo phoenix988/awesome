@@ -524,41 +524,41 @@ local col_bg =  wibox.widget {
      widget = wibox.widget.textbox
 }
 
-
+--
+--
 -- powerline seperators
 local seperator = wibox.widget {
-     markup = "<span foreground='" .. theme.seperator_1 .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.seperator_1 .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
 local seperator_dif = wibox.widget {
-     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_1 .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_1 .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
-
 local seperator_col = wibox.widget {
-     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_2 .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_2 .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
 local seperator_col_dif = wibox.widget {
-     markup = "<span foreground='" .. theme.seperator_2 .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.seperator_2 .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
 local seperator_fs = wibox.widget {
-     markup = "<span foreground='" .. theme.seperator_3 .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.seperator_3 .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
 local seperator_fs_diff = wibox.widget {
-     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_3 .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_3 .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
 local seperator_black = wibox.widget {
-     markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
@@ -572,12 +572,12 @@ seperator_col:set_right(-4)
 local seperator_dif = wibox.container.margin(seperator_dif)
 seperator_dif:set_left(0)
 
--- Seperator end
+-- seperator end
 
--- Eminent-like task filtering
+-- eminent-like task filtering
 local orig_filter = awful.widget.taglist.filter.all
 
--- Taglist label functions
+-- taglist label functions
 awful.widget.taglist.filter.all = function (t, args)
     if t.selected or #t:clients() > 0 then
         return orig_filter(t, args)
@@ -585,27 +585,27 @@ awful.widget.taglist.filter.all = function (t, args)
 end
 
 function theme.at_screen_connect(s)
-    -- Quake application
+    -- quake application
     s.quake = lain.util.quake({ app = awful.util.terminal })
 
-    -- If wallpaper is a function, call it with the screen
+    -- if wallpaper is a function, call it with the screen
     local wallpaper = theme.wallpaper
     if type(wallpaper) == "function" then
         wallpaper = wallpaper(s)
     end
     gears.wallpaper.maximized(wallpaper, s, true)
     
-    -- Tag names and layouts
+    -- tag names and layouts
     --awful.tag(awful.util.tagnames, s, awful.layout.layouts)
 	local names = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
 	local l = awful.layout.suit
 	local layouts = { l.max, l.tile.right, l.tile.right, l.max, l.tile.right, l.tile.right, l.tile.right, l.floating, l.floating, }
 	awful.tag(names, s, layouts)
 
-    -- Create a promptbox for each screen
+    -- create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
-    -- Create an imagebox widget which will contains an icon indicating which layout we're using.
-    -- We need one layoutbox per screen.
+    -- create an imagebox widget which will contains an icon indicating which layout we're using.
+    -- we need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
     s.mylayoutbox:buttons(awful.util.table.join(
                            awful.button({ }, 1, function () awful.layout.inc( 1) end),
@@ -613,25 +613,25 @@ function theme.at_screen_connect(s)
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
 
-    -- Create a taglist widget
+    -- create a taglist widget
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
 
-    -- Create a tasklist widget
+    -- create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
     s.mytasklist = wibox.container.background(s.mytasklist, "#00000000")
 
-    -- Create the horizontal wibox
+    -- create the horizontal wibox
     s.mywibox = awful.wibar({ position = "top", 
     screen = s, 
     height = 25, 
     bg = theme.bg_normal, 
     fg = theme.fg_normal })
 
-    -- Add widgets to the wibox
+    -- add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
-        { -- Left widgets
+        { -- left widgets
             mylauncher,
             layout = wibox.layout.fixed.horizontal,
             small_spr,
@@ -643,8 +643,8 @@ function theme.at_screen_connect(s)
             s.mypromptbox,
             spr_big,
         },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
+        s.mytasklist, -- middle widget
+        { -- right widgets
             layout = wibox.layout.fixed.horizontal,
             spr_big,
             small_spr,

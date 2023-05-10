@@ -529,38 +529,38 @@ local col_bg =  wibox.widget {
 
 -- powerline seperators
 local seperator = wibox.widget {
-     markup = "<span foreground='" .. theme.seperator_1 .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.seperator_1 .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
 local seperator_dif = wibox.widget {
-     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_1 .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_1 .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
 
 local seperator_col = wibox.widget {
-     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_2 .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_2 .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
 local seperator_col_dif = wibox.widget {
-     markup = "<span foreground='" .. theme.seperator_2 .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.seperator_2 .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
 local seperator_fs = wibox.widget {
-     markup = "<span foreground='" .. theme.seperator_3 .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.seperator_3 .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
 local seperator_fs_diff = wibox.widget {
-     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_3 .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.bg_normal .. "' background='" .. theme.seperator_3 .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
 local seperator_black = wibox.widget {
-     markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
+     markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
      widget = wibox.widget.textbox,
 }
 
