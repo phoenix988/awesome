@@ -27,9 +27,9 @@ theme.fg_mem                                    = "#B48EAD"
 theme.fg_icon                                   = "#88C0D0"
 theme.bg_normal                                 = "#2E3440"
 theme.bg_focus                                  = "#2E3440"
-theme.fg_urgent                                 = "#2E3440"
+theme.fg_urgent                                 = "#E98989"
 theme.bg_alt                                    = "#191724"
-theme.bg_urgent                                 = "#E98989"
+theme.bg_urgent                                 = "#2E3440"
 theme.border_width                              = 2
 theme.border_normal                             = "#2E3440"
 theme.border_focus                              = "#B48EAD"
@@ -107,9 +107,9 @@ local green  = "#8FEB8F"
 local white	 = theme.fg_normal
 
 -- Make the clock widget
-local mytextclock = wibox.widget.textclock(markup(theme.bg_normal, "  %a") .. markup(theme.bg_alt, " %d ") .. markup(theme.bg_normal, "%b ") .. markup(theme.bg_alt, "  🕰  %I:%M "))
+local mytextclock = wibox.widget.textclock(markup(theme.bg_normal, "  %a") .. markup(theme.bg_alt, " %d ") .. markup(theme.bg_normal, "%b ") .. markup(theme.bg_alt, " %I:%M "))
 mytextclock.font = "JetBrains Mono Nerd 12"
-local mytextclock = wibox.container.margin(mytextclock, 1, 1, 7, 1)
+local mytextclock = wibox.container.margin(mytextclock, 1, 1, 3, 1)
 
 
 -- Set the bg color of the clock widget
