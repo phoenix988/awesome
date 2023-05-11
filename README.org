@@ -25,12 +25,12 @@ cp -r $HOME/dmscripts/.dmenu $HOME/.dmenu
 
 *** OPTIONAL
 If you want to install a bunch of fonts that can come in handy
-you can clone my repo wher I store a collection of fonts I use for my configs
+you can clone my repo where I store a collection of fonts I use for my configs
 #+begin_src sh
 # Here you clone them to your user folder
 git clone https://github.com/phoenix988/fonts.git $HOME/.local/share/fonts
 
-# But you can also choose to move them to /usrr/share/fonts to make it systemwide
+# But you can also choose to move them to /usr/share/fonts to make it systemwide
 sudo cp -r $HOME/fonts/* /usr/share/fonts
 #+end_src
 
