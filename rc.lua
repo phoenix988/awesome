@@ -60,7 +60,7 @@ run_once({ "unclutter -root" }) -- entries must be comma-separated
 -- }}}
 
 -- {{{ Variable definitions
-local chosen_theme = "dracula"
+local chosen_theme = "iceberg"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "kitty"
@@ -635,7 +635,7 @@ awful.rules.rules = {
        { rule = { class = "Steam" },
         properties = {tag = " " } },
 
-    { rule = { class = "gimp-2.10" },
+    { rule = { class = "Gimp" },
           properties = { maximized = true, tag = " " } },
 
     { rule = { class = "Yad" },
@@ -644,6 +644,9 @@ awful.rules.rules = {
 
        { rule = { class = "youtube.com" },
         properties = { screen = 1, tag = " " } },
+
+       { rule = { class = "whatsapp-nativefier-d40211" },
+        properties = { tag = " " } },
           
 }
 -- }}}
@@ -739,4 +742,4 @@ awful.spawn.with_shell("~/.config/awesome/autostart.sh")
 --awful.spawn.with_shell("~/.fehbg")
 
 
-beautiful.useless_gap = 5
+beautiful.useless_gap = 7
