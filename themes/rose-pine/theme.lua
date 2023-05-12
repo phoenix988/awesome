@@ -103,7 +103,7 @@ local threshold = 80
 local markup = lain.util.markup
 local blue   = theme.fg_focus
 local red    = "#EB8F8F"
-local green  = "#31748f"
+local green  = "#8FEB8F"
 local white	 = theme.fg_normal
 
 -- Make the clock widget
@@ -180,7 +180,7 @@ local baticon = wibox.widget.imagebox(theme.bat)
 local batbar = wibox.widget {
     forced_height    = 1,
     forced_width     = 143,
-    color            = theme.fg_focus,
+    color            = theme.fg_normal,
     background_color = theme.bg_normal,
     margins          = 1,
     paddings         = 1,
@@ -189,7 +189,6 @@ local batbar = wibox.widget {
     widget           = wibox.widget.progressbar,
 }
 local batupd = lain.widget.bat({
-    battery = "BAT0", 
     settings = function()
         if bat_now.status == "N/A" or type(bat_now.perc) ~= "number" then return end
 
@@ -198,9 +197,9 @@ local batupd = lain.widget.bat({
             if bat_now.perc >= 98 then
                 batbar:set_color(green)
             elseif bat_now.perc > 50 then
-                batbar:set_color(theme.fg_focus)
+                batbar:set_color(theme.fg_normal)
             elseif bat_now.perc > 15 then
-                batbar:set_color(theme.fg_focus)
+                batbar:set_color(theme.fg_normal)
             else
                 batbar:set_color(red)
             end
@@ -208,10 +207,10 @@ local batupd = lain.widget.bat({
             if bat_now.perc >= 98 then
                 batbar:set_color(green)
             elseif bat_now.perc > 50 then
-                batbar:set_color(theme.fg_focus)
+                batbar:set_color(theme.fg_normal)
                 baticon:set_image(theme.bat)
             elseif bat_now.perc > 15 then
-                batbar:set_color(theme.fg_focus)
+                batbar:set_color(theme.fg_normal)
                 baticon:set_image(theme.bat_low)
             else
                 batbar:set_color(red)
@@ -337,7 +336,7 @@ local volicon = wibox.container.background(volicon, theme.seperator_2 , gears.sh
 -- Creates cpu widget
 --local cpuicon = wibox.widget.imagebox(theme.cpu)
 
-local cpufont = "Droid Sans 12"
+local cpufont = "Droid Sans 10"
 
 local cpuicon =  wibox.widget {
      markup = "<span foreground='" .. theme.fg_cpu .. "' font='" .. cpufont .. "'></span>",
@@ -664,11 +663,12 @@ function theme.at_screen_connect(s)
             temp_text,
             seperator_col,
             theme.mpd.widget,
+           -- baticon,
+           -- batwidget,
+           -- bar_spr,
             seperator_fs,
-            baticon,
-            batwidget,
-           -- fsicon,
-           -- fswidget,
+            fsicon,
+            fswidget,
             seperator_fs_diff,
             seperator_col_dif,
             volicon,
