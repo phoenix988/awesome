@@ -15,7 +15,7 @@ local gpmdp   = require("widgets.gpmdp")
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/rose-pine"
-theme.wallpaper                                 = theme.dir .. "/wall.png"
+theme.wallpaper                                 = theme.dir .. "/wall_default.png"
 theme.font                                      = "Droid Sans 14"
 theme.taglist_font 				= "Xirod 13"
 theme.fg_normal                                 = "#EBBCBA"
