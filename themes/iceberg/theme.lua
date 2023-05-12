@@ -116,13 +116,15 @@ local mytextclock = wibox.container.background(mytextclock, theme.fg_clock, gear
 
 
 -- Calendar
-lain.widget.calendar({
+local mycalendar = lain.widget.calendar({
     attach_to = { mytextclock },
     notification_preset = {
         font = "Droid Sans Mono 13",
         fg   = white,
         bg   = theme.bg_normal
 }})
+
+
 
 -- Launcher
 local mylauncher = awful.widget.button({image = theme.awesome_icon})
