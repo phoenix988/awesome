@@ -223,6 +223,8 @@ local batupd = lain.widget.bat({
 })
 local batbg = wibox.container.background(batbar, "#474747", gears.shape.rectangle)
 local batwidget = wibox.container.margin(batbg, 2, 7, 4, 4)
+
+local baticon = wibox.container.margin(baticon, 0,0, 3, 0)
 -- bat widget end
 
 ---- / fs
