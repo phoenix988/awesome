@@ -102,8 +102,8 @@ theme.layout_centerwork                         = theme.dir .. "/icons/centerwor
 local threshold = 80
 local markup = lain.util.markup
 local blue   = theme.fg_focus
-local red    = "#EB8F8F"
-local green  = "#8FEB8F"
+local red    = "#FF6E6E"
+local green  = "#50FA7B"
 local white	 = theme.fg_normal
 
 -- Make the clock widget
@@ -127,6 +127,8 @@ lain.widget.calendar({
 -- Launcher
 local mylauncher = awful.widget.button({image = theme.awesome_icon})
 mylauncher:connect_signal("button::press", function() awful.util.mymainmenu:toggle() end)
+
+local mylauncher = wibox.container.background(mylauncher,theme.bg_alt , gears.shape.rectangle)
 
 --[[ Mail IMAP check
 -- commented because it needs to be set before use
@@ -228,7 +230,7 @@ local batwidget = wibox.container.margin(batbg, 2, 7, 4, 4)
 --local fsicon = wibox.widget.imagebox(theme.disk)
 local fsbar = wibox.widget {
     forced_height    = 1,
-    forced_width     = 120,
+    forced_width     = 100,
     color            = theme.fg_focus,
     background_color = theme.bg_normal,
     margins          = 1,
@@ -277,7 +279,7 @@ end)
 -- ALSA volume bar
 local volicon = wibox.widget.imagebox(theme.vol)
 theme.volume = lain.widget.alsabar({
-    width = 143, border_width = 0, ticks = true, ticks_size = 13,
+    width = 120, border_width = 0, ticks = true, ticks_size = 13,
     notification_preset = { font = theme.font },
     --togglechannel = "IEC958,3",
     settings = function()
@@ -346,15 +348,10 @@ local cpuicon =  wibox.widget {
 
 local tempfont = "Droid Sans 7"
 
-local tempicon =  wibox.widget {
-     markup = "<span foreground='" .. theme.fg_cpu .. "' font='" .. tempfont .. "'>🌡</span>",
-     widget = wibox.widget.textbox
-}
-
 
 local cpubar = wibox.widget {
     forced_height    = 1,
-    forced_width     = 120,
+    forced_width     = 100,
     color            = theme.fg_cpu,
     background_color = theme.bg_normal,
     margins          = 1,
@@ -375,7 +372,7 @@ theme.cpu = lain.widget.cpu({
 
 local tempbar = wibox.widget {
     forced_height    = 5,
-    forced_width     = 35,
+    forced_width     = 60,
     color            = theme.fg_cpu,
     background_color = theme.bg_normal,
     margins          = 1,
@@ -391,6 +388,19 @@ local tempbar = wibox.widget {
 theme.temp = lain.widget.temp({
     tempfile = "/sys/class/hwmon/hwmon3/temp1_input",
     settings = function()
+        if coretemp_now >= threshold then
+            tempbar:set_color(red)
+            tempicon =  wibox.widget {
+            markup = "<span foreground='" .. red .. "' font='" .. tempfont .. "'>🌡</span>",
+            widget = wibox.widget.textbox}
+        else
+            tempbar:set_color(theme.fg_cpu)
+               tempicon =  wibox.widget {
+               markup = "<span foreground='" .. theme.fg_cpu .. "' font='" .. tempfont .. "'>🌡</span>",
+               widget = wibox.widget.textbox}
+
+        end
+
         tempbar:set_value(coretemp_now / 100 )
     end
 })
@@ -458,7 +468,7 @@ end)
 -- Makes the memory widget
 local memorybar = wibox.widget {
     forced_height    = 1,
-    forced_width     = 120,
+    forced_width     = 100,
     color            = theme.fg_mem,
     background_color = theme.bg_normal,
     margins          = 1,
@@ -564,6 +574,12 @@ local seperator_black = wibox.widget {
      widget = wibox.widget.textbox,
 }
 
+local right_powerline = wibox.widget {
+     markup = "<span foreground='" .. theme.bg_alt .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
+     widget = wibox.widget.textbox,
+}
+
+
 
 
 local seperator = wibox.container.margin(seperator)
@@ -616,6 +632,8 @@ function theme.at_screen_connect(s)
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
 
+
+   
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
 
@@ -636,7 +654,9 @@ function theme.at_screen_connect(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             mylauncher,
+            right_powerline,
             layout = wibox.layout.fixed.horizontal,
+            small_spr,
             small_spr,
             s.mylayoutbox,
             bar_spr,
@@ -661,16 +681,13 @@ function theme.at_screen_connect(s)
             cpuwidget,
             tempicon,
             tempwidget,
-            temp_text,
+           -- temp_text,
             seperator_col,
-            theme.mpd.widget,
            -- baticon,
            -- batwidget,
            -- bar_spr,
-            seperator_fs,
             fsicon,
             fswidget,
-            seperator_fs_diff,
             seperator_col_dif,
             volicon,
             volumewidget,
