@@ -128,6 +128,7 @@ lain.widget.calendar({
 local mylauncher = awful.widget.button({image = theme.awesome_icon})
 mylauncher:connect_signal("button::press", function() awful.util.mymainmenu:toggle() end)
 
+local mylauncher = wibox.container.background(mylauncher, theme.bg_alt, gears.shape.rectangle)
 --[[ Mail IMAP check
 -- commented because it needs to be set before use
 local mail = lain.widget.imap({
@@ -348,10 +349,6 @@ local cpuicon =  wibox.widget {
 
 local tempfont = "Droid Sans 7"
 
-local tempicon =  wibox.widget {
-     markup = "<span foreground='" .. theme.fg_cpu .. "' font='" .. tempfont .. "'>🌡</span>",
-     widget = wibox.widget.textbox
-}
 
 
 local cpubar = wibox.widget {
@@ -377,7 +374,7 @@ theme.cpu = lain.widget.cpu({
 
 local tempbar = wibox.widget {
     forced_height    = 5,
-    forced_width     = 35,
+    forced_width     = 45,
     color            = theme.fg_cpu,
     background_color = theme.bg_normal,
     margins          = 1,
@@ -393,9 +390,23 @@ local tempbar = wibox.widget {
 theme.temp = lain.widget.temp({
     tempfile = "/sys/class/thermal/thermal_zone0/temp",
     settings = function()
+        if coretemp_now >= threshold then
+            tempbar:set_color(red)
+            tempicon =  wibox.widget {
+            markup = "<span foreground='" .. red .. "' font='" .. tempfont .. "'>🌡</span>",
+            widget = wibox.widget.textbox}
+        else
+            tempbar:set_color(theme.fg_cpu)
+               tempicon =  wibox.widget {
+               markup = "<span foreground='" .. theme.fg_cpu .. "' font='" .. tempfont .. "'>🌡</span>",
+               widget = wibox.widget.textbox}
+
+        end
+
         tempbar:set_value(coretemp_now / 100 )
     end
 })
+
 
 
 local temp_text_setting = wibox.widget {
@@ -567,6 +578,10 @@ local seperator_black = wibox.widget {
      widget = wibox.widget.textbox,
 }
 
+local right_powerline = wibox.widget {
+     markup = "<span foreground='" .. theme.bg_alt .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
+     widget = wibox.widget.textbox,
+}
 
 local seperator = wibox.container.margin(seperator)
 seperator:set_right(-1)
@@ -638,7 +653,9 @@ function theme.at_screen_connect(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             mylauncher,
+            right_powerline,
             layout = wibox.layout.fixed.horizontal,
+            small_spr,
             small_spr,
             s.mylayoutbox,
             bar_spr,
