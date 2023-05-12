@@ -38,7 +38,7 @@ do
 
         naughty.notify({ preset = naughty.config.presets.critical,
                          title = "Oops, an error happened!",
-                         text = tostring(err) })
+                         text  tostring(err) })
         in_error = false
     end)
 end
@@ -384,6 +384,8 @@ globalkeys = awful.util.table.join(
               {description = "run dm-pass", group = "dmenu"}),
     awful.key({ altkey }, "p", function () awful.util.spawn(home .. "/.dmenu/dm-play-pause") end,
               {description = "run dm-play-pause", group = "dmenu"}),
+    awful.key({ altkey }, "g", function () awful.util.spawn(home .. "/.dmenu/dm-theme") end,
+              {description = "run dm-theme", group = "dmenu"}),
 
     awful.key({ modkey, "Control" }, "n",
               function ()
@@ -636,7 +638,7 @@ awful.rules.rules = {
         properties = {tag = " " } },
 
     { rule = { class = "Gimp" },
-          properties = { maximized = true, tag = " " } },
+          properties = { tag = " " } },
 
     { rule = { class = "Yad" },
           properties = { float = true } },
