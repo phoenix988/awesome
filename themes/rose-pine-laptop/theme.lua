@@ -388,7 +388,7 @@ local tempbar = wibox.widget {
 
 -- make the temp widget
 theme.temp = lain.widget.temp({
-    tempfile = "/sys/class/thermal/thermal_zone0/temp",
+    tempfile = "/sys/class/thermal/thermal_zone0/hwmon1/temp1_input",
     settings = function()
         if coretemp_now >= threshold then
             tempbar:set_color(red)
@@ -400,9 +400,7 @@ theme.temp = lain.widget.temp({
                tempicon =  wibox.widget {
                markup = "<span foreground='" .. theme.fg_cpu .. "' font='" .. tempfont .. "'>🌡</span>",
                widget = wibox.widget.textbox}
-
         end
-
         tempbar:set_value(coretemp_now / 100 )
     end
 })
