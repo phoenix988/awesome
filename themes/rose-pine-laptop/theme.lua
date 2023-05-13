@@ -54,7 +54,10 @@ theme.vol_no                                    = theme.dir .. "/icons/vol_no.pn
 theme.vol_mute                                  = theme.dir .. "/icons/vol_mute.png"
 theme.disk                                      = theme.dir .. "/icons/disk.png"
 theme.ac                                        = theme.dir .. "/icons/ac.png"
+theme.ac_low                                    = theme.dir .. "/icons/ac_low.png"
+theme.ac_full                                   = theme.dir .. "/icons/ac_full.png"
 theme.bat                                       = theme.dir .. "/icons/bat.png"
+theme.bat_full                                  = theme.dir .. "/icons/bat_full.png"
 theme.bat_low                                   = theme.dir .. "/icons/bat_low.png"
 theme.bat_no                                    = theme.dir .. "/icons/bat_no.png"
 theme.cpu                                       = theme.dir .. "/icons/cpu.png"
@@ -195,28 +198,32 @@ local batupd = lain.widget.bat({
         if bat_now.status == "N/A" or type(bat_now.perc) ~= "number" then return end
 
         if bat_now.status == "Charging" then
-            baticon:set_image(theme.ac)
             if bat_now.perc >= 98 then
+                baticon:set_image(theme.ac_full)
                 batbar:set_color(green)
             elseif bat_now.perc > 50 then
+                baticon:set_image(theme.ac)
                 batbar:set_color(theme.fg_focus)
             elseif bat_now.perc > 15 then
+                baticon:set_image(theme.ac)
                 batbar:set_color(theme.fg_focus)
             else
+                baticon:set_image(theme.ac_low)
                 batbar:set_color(red)
             end
         else
             if bat_now.perc >= 98 then
                 batbar:set_color(green)
+                baticon:set_image(theme.bat_full)
             elseif bat_now.perc > 50 then
                 batbar:set_color(theme.fg_focus)
                 baticon:set_image(theme.bat)
             elseif bat_now.perc > 15 then
                 batbar:set_color(theme.fg_focus)
-                baticon:set_image(theme.bat_low)
+                baticon:set_image(theme.bat)
             else
                 batbar:set_color(red)
-                baticon:set_image(theme.bat_no)
+                baticon:set_image(theme.bat_low)
             end
         end
         batbar:set_value(bat_now.perc / 100)
@@ -643,6 +650,7 @@ function theme.at_screen_connect(s)
     s.mywibox = awful.wibar({ position = "top", 
     screen = s, 
     height = 25, 
+    border_width = 8, 
     bg = theme.bg_normal, 
     fg = theme.fg_normal })
 
