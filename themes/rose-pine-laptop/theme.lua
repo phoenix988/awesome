@@ -220,10 +220,10 @@ local batupd = lain.widget.bat({
                 baticon:set_image(theme.bat)
             elseif bat_now.perc > 15 then
                 batbar:set_color(theme.fg_focus)
-                baticon:set_image(theme.bat)
+                baticon:set_image(theme.bat_low)
             else
                 batbar:set_color(red)
-                baticon:set_image(theme.bat_low)
+                baticon:set_image(theme.bat_no)
             end
         end
         batbar:set_value(bat_now.perc / 100)
@@ -522,6 +522,9 @@ local weather_widget = lain.widget.weather({
     end
 })
 
+
+
+
 -- Separators
 local first     = wibox.widget.textbox(markup.font("Droid Sans 3", " "))
 local spr       = wibox.widget.textbox(' ')
@@ -532,6 +535,9 @@ local bar_spr   = wibox.widget.textbox(markup.font("Droid Sans 3", " ") .. marku
 local linux_icon_font = "Droid Sans 14"
 local seperator_font = "FiraCode Nerd Font Mono 38"
 local seperator_font_alt = "Droid Sans 25"
+
+local update_widget = awful.widget.watch('bash -c "apt list --upgradable 2>/dev/null | wc -l"')
+
 
 local linux_icon =  wibox.widget {
      markup = "<span foreground='" .. theme.fg_icon .. "' font='" .. linux_icon_font .. "'></span>",
