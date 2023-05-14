@@ -60,7 +60,7 @@ run_once({ "unclutter -root" }) -- entries must be comma-separated
 -- }}}
 
 -- {{{ Variable definitions
-local chosen_theme = "rose-pine-laptop"
+local chosen_theme = "iceberg"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "kitty"
