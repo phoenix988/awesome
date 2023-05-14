@@ -101,6 +101,7 @@ theme.layout_centerfair                         = theme.dir .. "/icons/centerfai
 theme.layout_termfair                           = theme.dir .. "/icons/termfair.png"
 theme.layout_centerwork                         = theme.dir .. "/icons/centerwork.png"
 
+update_command = "bash -c 'apt list --upgradable 2>/dev/null | wc -l'"
 
 local threshold = 80
 local markup = lain.util.markup
@@ -116,6 +117,28 @@ local mytextclock = wibox.container.margin(mytextclock, 1, 1, 3, 1)
 
 -- Set the bg color of the clock widget
 local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, gears.shape.rectangle)
+
+local updatefont = "JetBrains Mono Nerd 12"
+
+-- Makes update widget
+update_widget = awful.widget.watch(
+    update_command,
+    600,
+    function(widget, stdout)
+        update_widget.markup = '<span foreground="' .. theme.bg_normal .. '" background="' .. theme.seperator_1 .. '" font="' .. updatefont .. '">' .. stdout .. '</span>'
+    end
+)
+
+
+local updateicon =  wibox.widget {
+     markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. updatefont .. "'>⟳</span>",
+     widget = wibox.widget.textbox
+}
+
+local update_widget = wibox.container.margin(update_widget, 0, 0, 4, 1)
+local updateicon = wibox.container.margin(updateicon, 0, 0, 4, 1)
+local updateicon = wibox.container.background(updateicon, theme.seperator_1, gears.shape.rectangle)
+local update_widget = wibox.container.background(update_widget, theme.seperator_1, gears.shape.rectangle)
 
 
 -- Calendar
@@ -536,7 +559,6 @@ local linux_icon_font = "Droid Sans 14"
 local seperator_font = "FiraCode Nerd Font Mono 38"
 local seperator_font_alt = "Droid Sans 25"
 
-local update_widget = awful.widget.watch('bash -c "apt list --upgradable 2>/dev/null | wc -l"')
 
 
 local linux_icon =  wibox.widget {
@@ -591,6 +613,11 @@ local seperator_black = wibox.widget {
 
 local right_powerline = wibox.widget {
      markup = "<span foreground='" .. theme.bg_alt .. "' background='" .. theme.bg_normal .. "' font='" .. seperator_font .. "'></span>",
+     widget = wibox.widget.textbox,
+}
+
+local clock_sep = wibox.widget {
+     markup = "<span foreground='" .. theme.seperator_1 .. "' background='" .. theme.seperator_1 .. "' font='" .. seperator_font .. "'> </span>",
      widget = wibox.widget.textbox,
 }
 
@@ -684,6 +711,10 @@ function theme.at_screen_connect(s)
             small_spr,
             seperator,
             mytextclock,
+            clock_sep,
+            updateicon,
+            update_widget,
+            clock_sep,
             seperator_dif,
             mem_icon,
             memory_widget,
