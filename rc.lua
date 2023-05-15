@@ -309,7 +309,7 @@ globalkeys = awful.util.table.join(
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
-    awful.key({ modkey,           }, "Tab",
+    awful.key({ modkey,  "Control"  }, "Tab",
         function ()
             awful.client.focus.history.previous()
             if client.focus then
@@ -339,9 +339,9 @@ globalkeys = awful.util.table.join(
               {description = "lock the screen", group = "awesome"}),
 --	awful.key({ modkey, "Shift"   }, "q", function () awful.util.spawn_with_shell("oblogout") end),
 
-    awful.key({ altkey, "Shift"   }, "l",     function () awful.tag.incmwfact( 0.05)          end,
+    awful.key({ modkey, "Control"   }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
-    awful.key({ altkey, "Shift"   }, "h",     function () awful.tag.incmwfact(-0.05)          end,
+    awful.key({ modkey, "Control"   }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
@@ -512,7 +512,7 @@ globalkeys = awful.util.table.join(
 --		end)
     
     -- Prompt
-    awful.key({ modkey }, "r", function () awful.util.spawn("rofi -show drun") end,
+    awful.key({ modkey }, "r", function () awful.util.spawn("rofi -show drun -show-icons") end,
               {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
