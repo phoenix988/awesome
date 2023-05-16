@@ -19,10 +19,10 @@ theme.wallpaper                                 = theme.dir .. "/wall.png"
 theme.font                                      = "JetBrains Mono Nerd 14"
 theme.taglist_font 				= "Xirod 13"
 theme.fg_normal                                 = "#91ACD1"
-theme.fg_focus                                  = "#A093C7"
+theme.fg_focus                                  = "#e9B189"
 theme.fg_alt                                    = "#93B6FF"
 theme.fg_clock                                  = "#93B6FF"
-theme.fg_cpu                                    = "#E9B189"
+theme.fg_cpu                                    = "#A093C7"
 theme.fg_mem                                    = "#B48EAD"
 theme.fg_icon                                   = "#8FC1C3"
 theme.bg_normal                                 = "#161821"
@@ -31,8 +31,8 @@ theme.fg_urgent                                 = "#E98989"
 theme.bg_alt                                    = "#2E3440"
 theme.bg_urgent                                 = "#161821"
 theme.border_width                              = 3
-theme.border_normal                             = "#91ACD1"
-theme.border_focus                              = "#A093C7"
+theme.border_normal                             = "#1E293B"
+theme.border_focus                              = "#E9B189"
 theme.taglist_fg_focus                          = "#E9B189"
 theme.taglist_bg_focus                          = "#161821"
 theme.taglist_bg_normal                         = "#161821"
@@ -98,7 +98,7 @@ theme.layout_centerfair                         = theme.dir .. "/icons/centerfai
 theme.layout_termfair                           = theme.dir .. "/icons/termfair.png"
 theme.layout_centerwork                         = theme.dir .. "/icons/centerwork.png"
 
-update_command = "bash -c 'paru -Qu | wc -l'"
+update_command = "bash -c 'paru -Syy &> /dev/null && paru -Qu 2> /dev/null | wc -l'"
 
 local threshold = 80
 local markup = lain.util.markup
@@ -270,7 +270,7 @@ theme.fs = lain.widget.fs({
     notification_preset = { fg = theme.fg_focus, bg = theme.bg_normal, font = "Droid Sans 10.5" },
     settings  = function()
         if tonumber(fs_now.used) < 90 then
-            fsbar:set_color(theme.fg_focus)
+            fsbar:set_color("#8FC1C3")
         else
             fsbar:set_color("#EB8F8F")
         end
@@ -283,7 +283,7 @@ local fswidget = wibox.container.margin(fsbg, 2, 7, 6, 6)
 local fswidget = wibox.container.background(fswidget, "#2E3440", gears.shape.rectangle)
 
 local fsicon =  wibox.widget {
-     markup = '<span foreground="#A093C7" font="Droid Sans 12">⛁</span>',
+     markup = '<span foreground="#8FC1C3" font="Droid Sans 12">⛁</span>',
      widget = wibox.widget.textbox
 }
 
