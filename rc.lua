@@ -643,25 +643,32 @@ awful.rules.rules = {
       properties = { titlebars_enabled = false } },
 --      properties = { titlebars_enabled = true } },
 
-       { rule = { class = "LibreWolf" },
-        properties = {tag = " " } },
+    { rule = { class = "LibreWolf" },
+     properties = {tag = " " } },
 
-       { rule = { class = "Steam" },
-        properties = {tag = " " } },
+    { rule = { class = "Steam" },
+     properties = {tag = " " } },
 
     { rule = { class = "Gimp" },
           properties = { tag = " " } },
 
-    { rule = { class = "Yad" },
-          properties = { float = true } },
 
-
-       { rule = { class = "youtube.com" },
+    { rule = { class = "youtube.com" },
         properties = { screen = 1, tag = " " } },
 
-       { rule = { class = "whatsapp-nativefier-d40211" },
+    { rule = { class = "whatsapp-nativefier-d40211" },
         properties = { tag = " " } },
-          
+    
+    { rule = { class = "discord" },
+        properties = { tag = " " } },
+       
+
+         { rule = { class = "Yad" },
+               properties = { floating = true } },
+
+         { rule = { class = "Blueman-manager" },
+               properties = { floating = true } },
+
 }
 -- }}}
 
