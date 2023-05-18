@@ -31,7 +31,7 @@ theme.fg_urgent                                 = "#EB6F92"
 theme.bg_alt                                    = "#2E3440"
 theme.bg_urgent                                 = "#191724"
 theme.border_width                              = 3
-theme.border_normal                             = "#EB6F92"
+theme.border_normal                             = "#390F1C"
 theme.border_focus                              = "#C4A7E7"
 theme.taglist_fg_focus                          = "#9CCFD8"
 theme.taglist_bg_focus                          = "#191724"
@@ -98,7 +98,7 @@ theme.layout_centerfair                         = theme.dir .. "/icons/centerfai
 theme.layout_termfair                           = theme.dir .. "/icons/termfair.png"
 theme.layout_centerwork                         = theme.dir .. "/icons/centerwork.png"
 
-update_command = "bash -c 'paru -Qu | wc -l'"
+update_command = "bash -c 'paru -Syy &> /dev/null && paru -Qu 2> /dev/null | wc -l'"
 
 local threshold = 80
 local markup = lain.util.markup
