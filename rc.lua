@@ -64,7 +64,7 @@ run_once({ "unclutter -root" }) -- entries must be comma-separated
 local chosen_theme = "default"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
-local terminal     = "kitty"
+local terminal     = "kitty -e tmux attach"
 local editor       = os.getenv("EDITOR") or "nvim"
 local home         = os.getenv("HOME")
 local gui_editor   = "emacsclient -c -a emacs"

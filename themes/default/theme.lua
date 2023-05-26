@@ -474,6 +474,7 @@ local mail = lain.widget.imap({
    local bar_spr   = wibox.widget.textbox(markup.font("Droid Sans 3", " ") .. markup.fontfg(theme.font, "#333333", "  |  ") .. markup.font("Droid Sans 5", " "))
    
    local linux_icon_font = "Droid Sans 14"
+   local first_font = "Droid Sans 7"
    local seperator_font = "FiraCode Nerd Font Mono 38"
    local seperator_font_alt = "Droid Sans 25"
    
@@ -483,12 +484,18 @@ local mail = lain.widget.imap({
    }
    
    local linux_icon = wibox.container.background(linux_icon, theme.bg_normal, gears.shape.rectangle)
+
+   local first_main =  wibox.widget {
+        markup = "<span background='" .. theme.bg_alt .. "' foreground='" .. theme.bg_alt .. "'  font='" .. first_font .. "'>|</span>",
+        widget = wibox.widget.textbox
+   }
+   
+   local first_main = wibox.container.background(first_main, theme.bg_alt, gears.shape.rectangle)
    
    local col_bg =  wibox.widget {
         markup = "<span background='" .. theme.bg_normal .. "' font='" .. seperator_font_alt .. "'> </span>",
         widget = wibox.widget.textbox
    }
-   
    
    -- powerline seperators
    local seperator = wibox.widget {
@@ -615,6 +622,7 @@ function theme.at_screen_connect(s)
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
+            first_main,
             mylauncher,
             right_powerline,
             layout = wibox.layout.fixed.horizontal,
