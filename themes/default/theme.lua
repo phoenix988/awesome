@@ -584,7 +584,7 @@ function theme.at_screen_connect(s)
     -- local names = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
     
     -- Set workspace names
-    local names = { "  ", " ", "  ", "  ", "  ", "  ", "  ", " ", "  " }
+    local names = { "  ", " ", "  ", "  ", "  ", "  ", "  ", " ", "  " }
     local l = awful.layout.suit
     local layouts = { l.max, l.tile.right, l.tile.right, l.max, l.tile.right, l.tile.right, l.tile.right, l.floating, l.floating, }
     awful.tag(names, s, layouts)

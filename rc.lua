@@ -771,5 +771,4 @@ awful.spawn.with_shell("~/.config/awesome/autostart_custom.sh")
 --awful.spawn.with_shell("~/.fehbg")
 
 
-beautiful.useless_gap = 5
 
