@@ -1,8 +1,15 @@
+--[[
+
+     Copland Awesome WM theme 2.0
+     github.com/copycat-killer
+
+--]]
+
 local theme                                     = {}
-theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/rose-pine"
+theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/rose-pine-laptop"
 theme.wallpaper                                 = theme.dir .. "/wall_default.png"
-theme.font                                      = "JetBrains Mono Nerd 14"
-theme.taglist_font 				                = "Xirod 13"
+theme.font                                      = "Droid Sans 14"
+theme.taglist_font 				= "Xirod 13"
 theme.fg_normal                                 = "#EBBCBA"
 theme.fg_focus                                  = "#C4A7E7"
 theme.fg_alt                                    = "#EBBCBA"
@@ -16,7 +23,7 @@ theme.fg_urgent                                 = "#EB6F92"
 theme.bg_alt                                    = "#2E3440"
 theme.bg_urgent                                 = "#191724"
 theme.border_width                              = 3
-theme.border_normal                             = "#390F1C"
+theme.border_normal                             = "#EB6F92"
 theme.border_focus                              = "#C4A7E7"
 theme.taglist_fg_focus                          = "#9CCFD8"
 theme.taglist_bg_focus                          = "#191724"
@@ -61,7 +68,7 @@ theme.layout_max                                = theme.dir .. "/icons/max.png"
 theme.layout_fullscreen                         = theme.dir .. "/icons/fullscreen.png"
 theme.layout_magnifier                          = theme.dir .. "/icons/magnifier.png"
 theme.layout_floating                           = theme.dir .. "/icons/floating.png"
-theme.useless_gap                               = 6
+theme.useless_gap                               = 0
 theme.titlebar_close_button_focus               = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal              = theme.dir .. "/icons/titlebar/close_normal.png"
 theme.titlebar_ontop_button_focus_active        = theme.dir .. "/icons/titlebar/ontop_focus_active.png"
