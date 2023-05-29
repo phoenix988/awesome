@@ -462,8 +462,6 @@ local weather_widget = lain.widget.weather({
 })
 
 
-
-
 -- Separators
 local first     = wibox.widget.textbox(markup.font("Droid Sans 3", " "))
 local spr       = wibox.widget.textbox(' ')
@@ -472,10 +470,16 @@ local small_spr = wibox.widget.textbox(markup.font("Droid Sans 4", "  "))
 local bar_spr   = wibox.widget.textbox(markup.font("Droid Sans 3", " ") .. markup.fontfg(theme.font, "#333333", "  |  ") .. markup.font("Droid Sans 5", " "))
 
 local linux_icon_font = "Droid Sans 14"
+local first_font = "Droid Sans 10"
 local seperator_font = "FiraCode Nerd Font Mono 38"
 local seperator_font_alt = "Droid Sans 25"
 
-
+local first_main =  wibox.widget {
+        markup = "<span background='" .. theme.bg_alt .. "' foreground='" .. theme.bg_alt .. "'  font='" .. first_font .. "'>|</span>",
+        widget = wibox.widget.textbox
+}
+   
+local first_main = wibox.container.background(first_main, theme.bg_alt, gears.shape.rectangle)
 
 local linux_icon =  wibox.widget {
      markup = "<span foreground='" .. theme.fg_icon .. "' font='" .. linux_icon_font .. "'></span>",
@@ -571,7 +575,7 @@ function theme.at_screen_connect(s)
 
     -- Tag names and layouts
     --awful.tag(awful.util.tagnames, s, awful.layout.layouts)
-	local names = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
+        local names = { "  ", " ", "  ", "  ", "  ", "  ", "  ", " ", "  " }
 	local l = awful.layout.suit
 	local layouts = { l.max, l.tile.right, l.tile.right, l.max, l.tile.right, l.tile.right, l.tile.right, l.floating, l.floating, }
 	awful.tag(names, s, layouts)
@@ -607,6 +611,7 @@ function theme.at_screen_connect(s)
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
+            first_main,
             mylauncher,
             right_powerline,
             layout = wibox.layout.fixed.horizontal,
