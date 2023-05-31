@@ -36,7 +36,7 @@ local font         = {}
 font.first         = "Droid Sans 7"
 font.seperator     = "FiraCode Nerd Font Mono 38"
 font.seperator_alt = "Droid Sans 25"
-font.linux_icon    = "Droid Sans 14"
+font.linux_icon    = "Droid Sans 16"
 font.fs            = "Droid Sans 12"
 font.cpu           = "Droid Sans 10"
 font.temp          = "Droid Sans 9"
@@ -237,6 +237,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
    local volumewidget = wibox.container.margin(volumebg, 2, 7, 6, 6)
    
    local volumewidget = wibox.container.background(volumewidget, theme.seperator_2 , gears.shape.rectangle)
+   local volicon = wibox.container.margin(volicon, 2, 7, 2, 2)
    local volicon = wibox.container.background(volicon, theme.seperator_2 , gears.shape.rectangle)
 -- volume widget end
 
@@ -299,8 +300,6 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
        background_color = theme.bg_normal,
        margins          = 1,
        paddings         = 1,
-       shape            = gears.shape.rectangle, 
-       bar_shape         = gears.shape.rectangle,
        ticks            = true,
        ticks_size       = 13,
        widget           = wibox.widget.progressbar,
@@ -335,7 +334,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
        widget           = wibox.widget.textbox,
    }
    
-   temp_text = lain.widget.temp({
+   theme.temp_text = lain.widget.temp({
        tempfile = "/sys/class/thermal/thermal_zone0/hwmon4/temp1_input",
        settings = function()
            if coretemp_now >= threshold then
@@ -346,13 +345,13 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
        end
    })
    
-   local tempbg     = wibox.container.background(tempbar, theme.seperator_2 , gears.shape.rectangle)
+   local tempbg     = wibox.container.background(tempbar,"#474747" , gears.shape.rectangle)
    local tempwidget = wibox.container.margin(tempbg, 2, 7, 6, 6)
    local tempwidget = wibox.container.background(tempwidget, theme.seperator_2 , gears.shape.rectangle)
    
    local temptextbg = wibox.container.background(temp_text_setting, theme.seperator_2 , gears.shape.rectangle)
-   local temp_text  = wibox.container.margin(temptextbg, 2, 7, 4, 4)
-   local temp_text  = wibox.container.background(temp_text, theme.seperator_2 , gears.shape.rectangle)
+   local temptext  = wibox.container.margin(temptextbg, 2, 7, 4, 4)
+   local temptext  = wibox.container.background(temptext, theme.seperator_2 , gears.shape.rectangle)
    
    awful.tooltip {
        objects = { tempwidget },
@@ -401,7 +400,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
    awful.tooltip {
        objects = { memorywidget },
        timer_function = function()
-           return mem_now.used .. " / " .. mem_now.total 
+           return mem_now.used .. " / " .. mem_now.total .. " MB" 
        end
    }
 -- Memory widget end
@@ -610,7 +609,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
     
     -- Makes systray widget
     local systraywidget = wibox.widget.systray()
-    systraywidget:set_base_size(29)
+    systraywidget:set_base_size(27)
 
     -- Create the horizontal wibox
     s.mywibox = awful.wibar({ 

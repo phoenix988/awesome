@@ -77,6 +77,7 @@ awful.layout.layouts = {
     awful.layout.suit.spiral.dwindle,	--9
     awful.layout.suit.max,		--11
     awful.layout.suit.floating,		--1
+    awful.layout.suit.tile,
 --    lain.layout.cascade,
 --    lain.layout.cascade.tile,
 --    awful.layout.suit.max.fullscreen,
@@ -239,7 +240,7 @@ globalkeys = awful.util.table.join(
 
     -- Hotkeys
     awful.key({ modkey, }, "F1",      hotkeys_popup.show_help,
-              {description="show help", group="awesome"}),
+              {description="show awesome keybindings", group="awesome"}),
     awful.key({ modkey, }, "F2", function () awful.util.spawn(home .. "/.config/kitty/kitty-keys.sh") end,
               {description="show help for kitty", group="awesome"}),
     awful.key({ modkey, }, "F11", function () awful.util.spawn(home .. "/.scripts/restart/picom-control") end,
@@ -769,6 +770,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
 awful.spawn.with_shell("~/.config/awesome/autostart_custom.sh")
 --awful.spawn.with_shell("~/.fehbg")
-
-
 
