@@ -32,6 +32,7 @@ local green        = "#9ECE6A"
 local white        = theme.fg_normal
 local icon         = {}
 
+
 -- Defines fonts used in the widgets
 local font         = {}
 font.first         = "Droid Sans 7"
@@ -41,15 +42,18 @@ font.linux_icon    = "Droid Sans 16"
 font.fs            = "Droid Sans 14"
 font.cpu           = "Droid Sans 12"
 font.temp          = "Droid Sans 11"
+font.bar           = "Droid Sans 9"
 font.mem           = "Droid Sans 12"
-font.update        = "JetBrains Mono Nerd 12"
+font.update        = "JetBrains Mono Nerd 14"
 font.taglist       = "Droid Sans 17"
 
 
+theme.tasklist_font             = "JetBrains Mono Nerd 16"
+theme.tasklist_plain_task_name  = true
 
 -- Make the clock widget
 local mytextclock = wibox.widget.textclock(markup(theme.bg_normal, "  %a") .. markup(theme.bg_alt, " %d ") .. markup(theme.bg_normal, "%b ") .. markup(theme.bg_alt, " %I:%M "))
-mytextclock.font = "JetBrains Mono Nerd 12"
+mytextclock.font = "JetBrains Mono Nerd 14"
 local mytextclock = wibox.container.margin(mytextclock, 1, 1, 3, 1)
 
 -- Set the bg color of the clock widget
@@ -189,6 +193,14 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
        -- Perform some action when the widget is clicked
        awful.spawn("baobab")
    end)
+
+    awful.tooltip {
+           objects = { fswidget },
+           timer_function = function()
+               return fs_now.used  
+           end
+    }
+
 -- fs widget end
 
 -- ALSA volume bar
@@ -381,15 +393,30 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
        ticks_size       = 13,
        widget           = wibox.widget.progressbar,
    }
+
+    local memorytext = wibox.widget.textbox()
+
+    local memorymargin = wibox.widget {
+         widget = wibox.container.margin,
+         bottom = 10,
+         top = 1000,
+         left = 1000,
+    }
+
+    local memorystack = wibox.widget {
+        memorybar,
+        memorytext,
+        layout = wibox.layout.stack
+    }
    
    theme.mem = lain.widget.mem({
      settings = function()
-           --widget:set_markup( "MEM: " .. mem_now.used .. "MB ")
            memorybar:set_value(mem_now.used / mem_now.total )
+           --memorytext:set_markup("<span foreground='" .. theme.fg_alt .. "' font='" .. font.bar .. "'> Free: " .. mem_now.used .. " MB</span>")
        end
    })
    
-   local memorybg = wibox.container.background(memorybar, "#474747", gears.shape.rectangle)
+   local memorybg = wibox.container.background(memorystack, "#474747", gears.shape.rectangle)
    local memorywidget = wibox.container.margin(memorybg, 2, 7, 6, 6)
 
    local memorywidget = wibox.container.background(memorywidget, theme.bg_normal, gears.shape.rectangle)
@@ -628,13 +655,13 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
     
     -- Makes systray widget
     local systraywidget = wibox.widget.systray()
-    systraywidget:set_base_size(24)
+    systraywidget:set_base_size(28)
 
     -- Create the horizontal wibox
     s.mywibox = awful.wibar({ 
     position = "top", 
     screen = s, 
-    height = 32, 
+    height = 35, 
     border_width = 10,
     bg = theme.bg_normal, 
     fg = theme.fg_normal, 
@@ -671,6 +698,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
             s.mytasklist,
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            seperator.first_sec,
             seperator.first_sec,
             powerline.sep_1,
             mytextclock,
