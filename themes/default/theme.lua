@@ -12,10 +12,11 @@ local awful   = require("awful")
 local wibox   = require("wibox")
 local os      = { getenv = os.getenv, setlocale = os.setlocale }
 local gpmdp   = require("widgets.gpmdp")
+local mytasklist = require("widgets.mytasklist")
 local awesome, client = awesome, client
 
 -- Imports the colors to use
-local chosen_theme  = "tokyo-night"
+local chosen_theme  = "rose-pine"
 local theme         = require("themes/" .. chosen_theme .. "/color")
 
 -- Command to run to check for updates
@@ -37,11 +38,14 @@ font.first         = "Droid Sans 7"
 font.seperator     = "FiraCode Nerd Font Mono 38"
 font.seperator_alt = "Droid Sans 25"
 font.linux_icon    = "Droid Sans 16"
-font.fs            = "Droid Sans 12"
-font.cpu           = "Droid Sans 10"
-font.temp          = "Droid Sans 9"
-font.mem           = "Droid Sans 10"
+font.fs            = "Droid Sans 14"
+font.cpu           = "Droid Sans 12"
+font.temp          = "Droid Sans 11"
+font.mem           = "Droid Sans 12"
 font.update        = "JetBrains Mono Nerd 12"
+font.taglist       = "Droid Sans 17"
+
+
 
 -- Make the clock widget
 local mytextclock = wibox.widget.textclock(markup(theme.bg_normal, "  %a") .. markup(theme.bg_alt, " %d ") .. markup(theme.bg_normal, "%b ") .. markup(theme.bg_alt, " %I:%M "))
@@ -361,7 +365,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
    }
    
    -- makes the colour of the temp widget
-   local tempicon = wibox.container.margin(tempicon, 8, 7, 4, 0)
+   local tempicon = wibox.container.margin(tempicon, 8, 7, 6, 0)
    local tempicon = wibox.container.background(tempicon, theme.seperator_2 , gears.shape.rectangle)
 -- Temp  widget End
    
@@ -387,6 +391,8 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
    
    local memorybg = wibox.container.background(memorybar, "#474747", gears.shape.rectangle)
    local memorywidget = wibox.container.margin(memorybg, 2, 7, 6, 6)
+
+   local memorywidget = wibox.container.background(memorywidget, theme.bg_normal, gears.shape.rectangle)
    
    -- Makes memory icon
    local memicon =  wibox.widget {
@@ -394,8 +400,8 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
         widget = wibox.widget.textbox
    }
    
-   local memicon = wibox.container.background(memicon, theme.bg_normal, gears.shape.rectangle)
    local memicon = wibox.container.margin(memicon, 10, 7, 7, 4)
+   local memicon = wibox.container.background(memicon, theme.bg_normal, gears.shape.rectangle)
 
    awful.tooltip {
        objects = { memorywidget },
@@ -429,7 +435,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
    local seperator = {}
    seperator.first     = wibox.widget.textbox(markup.font("Droid Sans 3", " "))
    seperator.spr       = wibox.widget.textbox(' ')
-   seperator.spr_big   = wibox.widget.textbox('    ')
+   seperator.spr_big   = wibox.widget.textbox(markup.font("Droid Sans 20", "         "))
    seperator.small_spr = wibox.widget.textbox(markup.font("Droid Sans 4", "  "))
    seperator.bar_spr   = wibox.widget.textbox(markup.font("Droid Sans 3", " ") .. markup.fontfg(theme.font, "#333333", "  |  ") .. markup.font("Droid Sans 5", " "))
 
@@ -533,7 +539,8 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
 
-    local taglist_font = "Droid Sans 17"
+    s.mylayoutbox = wibox.container.background(s.mylayoutbox, theme.bg_normal, gears.shape.rectangle)
+
 
     -- Create a taglist widget
     -- s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
@@ -542,74 +549,75 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
        filter    = awful.widget.taglist.filter.all,
        buttons   = awful.util.taglist_buttons,
        style     = {
-          font     = taglist_font,      
-          spacing  = 4,
+          font     = font.taglist,      
+          spacing  = 0,
        },
     }
 
     -- Create a tasklist widget
-    -- s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
-    s.mytasklist = awful.widget.tasklist {
-       screen   = s,
-       filter   = awful.widget.tasklist.filter.currenttags,
-       buttons  = awful.util.tasklist_buttons,
-       style    = {
-          shape_border_width = 1,
-          shape_border_color = theme.bg_normal,
-          shape              = gears.shape.rounded_bar,
-          bg_focus           = theme.fg_alt,
-          bg_normal          = theme.bg_alt,
-          spacing            = 10,
-       },
-       layout   = {
-           spacing_widget = {
-               {
-                   forced_width  = 5,
-                   forced_height = 30,
-                   thickness     = 1,
-                   shape         = gears.shape.circle,
-                   color         = theme.bg_normal,
-                   margin        = 20,
-                   widget        = wibox.widget.separator,
-               },
-               valign = 'center',
-               halign = 'center',
-               widget = wibox.container.place,
-           },
-           spacing = 20,
-           layout  = wibox.layout.fixed.horizontal
-       },
-       -- Notice that there is *NO* wibox.wibox prefix, it is a template,
-       -- not a widget instance.
-       widget_template = {
-           {
-               wibox.widget.base.make_widget(),
-               forced_height = 5,
-               id            = 'background_role',
-               widget        = wibox.container.background,
-           },
-           {
-               {
-                   id            = 'clienticon',
-                   widget        = awful.widget.clienticon,
-                   forced_width  = 25,
-               },
-               margins = 2,
-               widget  = wibox.container.margin
-           },
-           nil,
-           create_callback = function(self, c, index, objects) --luacheck: no unused args
-               self:get_children_by_id('clienticon')[1].client = c
-           end,
-           layout = wibox.layout.align.vertical,
-       },
-    }
+    s.mytasklist = mytasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
-    s.mytasklist = wibox.container.background(s.mytasklist, "#00000000")
+    -- Create tasklist with icons
+    --s.mytasklist = awful.widget.tasklist {
+    --   screen   = s,
+    --   filter   = awful.widget.tasklist.filter.currenttags,
+    --   buttons  = awful.util.tasklist_buttons,
+    --   style    = {
+    --      shape_border_width = 1,
+    --      shape_border_color = theme.bg_normal,
+    --      shape              = gears.shape.rounded_bar,
+    --      bg_focus           = theme.taglist_fg_focus,
+    --      bg_normal          = theme.bg_alt,
+    --      spacing            = 10,
+    --   },
+    --   layout   = {
+    --       spacing_widget = {
+    --           {
+    --               forced_width  = 5,
+    --               forced_height = 30,
+    --               thickness     = 1,
+    --               shape         = gears.shape.circle,
+    --               color         = theme.bg_normal,
+    --               margin        = 20,
+    --               widget        = wibox.widget.separator,
+    --           },
+    --           valign = 'center',
+    --           halign = 'center',
+    --           widget = wibox.container.place,
+    --       },
+    --       spacing = 20,
+    --       layout  = wibox.layout.fixed.horizontal
+    --   },
+    --   -- Notice that there is *NO* wibox.wibox prefix, it is a template,
+    --   -- not a widget instance.
+    --   widget_template = {
+    --       {
+    --           wibox.widget.base.make_widget(),
+    --           forced_height = 5,
+    --           id            = 'background_role',
+    --           widget        = wibox.container.background,
+    --       },
+    --       {
+    --           {
+    --               id            = 'clienticon',
+    --               widget        = awful.widget.clienticon,
+    --               forced_width  = 25,
+    --           },
+    --           margins = 2,
+    --           widget  = wibox.container.margin
+    --       },
+    --       nil,
+    --       create_callback = function(self, c, index, objects) --luacheck: no unused args
+    --           self:get_children_by_id('clienticon')[1].client = c
+    --       end,
+    --       layout = wibox.layout.align.vertical,
+    --   },
+    --}
+
     
     -- Makes systray widget
     local systraywidget = wibox.widget.systray()
-    systraywidget:set_base_size(27)
+    systraywidget:set_base_size(24)
 
     -- Create the horizontal wibox
     s.mywibox = awful.wibar({ 
@@ -630,26 +638,29 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
             mylauncher,
             powerline.sep_right,
             layout = wibox.layout.fixed.horizontal,
-            seperator.small_spr,
-            seperator.small_spr,
+            seperator.first_sec,
             s.mylayoutbox,
             seperator.first_sec,
             seperator.first,
-            s.mytasklist,
-            seperator.first_sec,
-            seperator.first,
-            seperator.bar_spr,
-            s.mytaglist,
+            {
+            {s.mytaglist,
+             bottom = 2,
+             color  = theme.fg_normal,
+             widget = wibox.container.margin,
+            },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+            },
             s.mypromptbox,
-            seperator.first_sec,
-            seperator.first_sec,
             seperator.first_sec,
             seperator.first_sec,
         },
           -- Middle widget
-        seperator.first_sec,
+            s.mytasklist,
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            seperator.first_sec,
             powerline.sep_1,
             mytextclock,
             seperator.clock_sep,
@@ -657,26 +668,133 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
             updatewidget,
             seperator.clock_sep,
             powerline.sep_2,
-            memicon,
-            memorywidget,
+            {
+            {memicon,
+             bottom = 2,
+             color  = theme.fg_mem,
+             widget = wibox.container.margin,
+            },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+            },
+            {
+            {memorywidget,
+             bottom = 2,
+             color  = theme.fg_mem,
+             widget = wibox.container.margin,
+            },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+            },
             powerline.sep_4,
-            cpuicon,
-            cpuwidget,
-            tempicon,
-            tempwidget,
+            {
+            {cpuicon,
+             bottom = 2,
+             color  = theme.fg_cpu,
+             widget = wibox.container.margin,
+            },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+            },
+            {
+            {cpuwidget,
+             bottom = 2,
+             color  = theme.fg_cpu,
+             widget = wibox.container.margin,
+             },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+             },
+            {
+            {tempicon,
+             bottom = 2,
+             color  = theme.fg_cpu,
+             widget = wibox.container.margin,
+             },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+             },
+            {
+            {tempwidget,
+             bottom = 2,
+             color  = theme.fg_cpu,
+             widget = wibox.container.margin,
+             },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+             },
             powerline.sep_3,
-            fsicon,
-            fswidget,
+            {
+            {fsicon,
+             bottom = 2,
+             color  = theme.fg_focus,
+             widget = wibox.container.margin,
+             },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+             },
+            {
+            {fswidget,
+             bottom = 2,
+             color  = theme.fg_focus,
+             widget = wibox.container.margin,
+             },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+             },
             powerline.sep_4,
-            volicon,
-            volumewidget,
+            {
+            {volicon,
+             bottom = 2,
+             color  = theme.fg_alt,
+             widget = wibox.container.margin,
+             },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+             },
+            {
+            {volumewidget,
+             bottom = 2,
+             color  = theme.fg_alt,
+             widget = wibox.container.margin,
+             },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+             },
             powerline.sep_3,
             seperator.col_bg,
-            seperator.col_bg,
-            wibox.widget.systray(),
-            seperator.col_bg,
+            {
+            {wibox.widget.systray(),
+             bottom = 2,
+             color  = theme.fg_normal,
+             widget = wibox.container.margin,
+            },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+            },
             seperator.first_sec,
-            linuxicon,
+            seperator.first_sec,
+            {
+            {linuxicon,
+             bottom = 2,
+             color  = theme.fg_icon,
+             widget = wibox.container.margin,
+             },
+             left  = 0,
+             right = 0,
+             layout = wibox.container.margin,
+             },
             seperator.first_sec,
         },
     }
