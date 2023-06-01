@@ -555,7 +555,18 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
     }
 
     -- Create a tasklist widget
-    s.mytasklist = mytasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
+    --s.mytasklist = mytasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
+
+    s.mytasklist = awful.widget.tasklist {
+        screen   = s,
+        filter   = function(c, scr)
+            return awful.widget.tasklist.filter.currenttags(c, scr) and c == client.focus
+        end,
+        buttons  = awful.util.tasklist_buttons,
+        template = {
+            -- Your template configuration here
+        },
+    }
 
     -- Create tasklist with icons
     --s.mytasklist = awful.widget.tasklist {
