@@ -8,4 +8,4 @@ function run {
   fi
 }
 
-
+run "picom -b --config $HOME/.config/picom/picom-jona.conf"
