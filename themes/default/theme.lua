@@ -570,7 +570,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
     -- local names = ["", "", "", "", "", "", "", "", "ﭮ", "", "", "﨣", "F1", "F2", "F3", "F4", "F5"]
     -- local names = { " ", " ", " ", " ", " ", " ", " ", " ", " "  }
     -- Set workspace names
-    local names = { "", " ", " ", " ", " ", "󰝚 ", "󰙯 ", " ", " " }
+    local names = { "", " ", " ", "󰓓 ", " ", "󰝚 ", "󰙯 ", " ", " " }
     local l = awful.layout.suit
     local layouts = { l.max, l.tile.right, l.tile.right, l.max, l.tile.right, l.tile.right, l.tile.right, l.floating, l.floating, }
     awful.tag(names, s, layouts)

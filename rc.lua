@@ -661,7 +661,7 @@ awful.rules.rules = {
      properties = {tag = "" } },
 
     { rule = { class = "Steam" },
-     properties = {tag = " " } },
+     properties = {tag = "󰓓 " } },
 
     { rule = { class = "Gimp" },
           properties = { tag = " " } },
