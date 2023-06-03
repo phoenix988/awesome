@@ -338,6 +338,8 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey, }, "Return", function () awful.spawn(terminal_alt) end,
+              {description = "open a terminal with tmux", group = "launcher"}),
+    awful.key({ modkey, }, "t", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Shift" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
@@ -656,25 +658,25 @@ awful.rules.rules = {
 --      properties = { titlebars_enabled = true } },
 
     { rule = { class = "LibreWolf" },
-     properties = {tag = "  " } },
+     properties = {tag = "" } },
 
     { rule = { class = "Steam" },
-     properties = {tag = "  " } },
+     properties = {tag = " " } },
 
     { rule = { class = "Gimp" },
-          properties = { tag = "  " } },
+          properties = { tag = " " } },
 
     { rule = { class = "kdenlive" },
-          properties = { tag = "  " } },
+          properties = { tag = " " } },
 
     { rule = { class = "youtube.com" },
-        properties = { screen = 1, tag = "  " } },
+        properties = { screen = 1, tag = "󰝚 " } },
 
     { rule = { class = "whatsapp-nativefier-d40211" },
-        properties = { tag = "  " } },
+        properties = { tag = "󰙯 " } },
     
     { rule = { class = "discord" },
-        properties = { tag = "  " } },
+        properties = { tag = "󰙯 " } },
        
 
          { rule = { class = "Yad" },

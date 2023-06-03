@@ -50,7 +50,7 @@ font.temp          = "Droid Sans 11"
 font.bar           = "Droid Sans 9"
 font.mem           = "Droid Sans 12"
 font.update        = "JetBrains Mono Nerd 14"
-font.taglist       = "Droid Sans 19"
+font.taglist       = "Droid Sans 21"
 
 theme.tasklist_font             = "JetBrains Mono Nerd 16"
 theme.tasklist_plain_task_name  = true
@@ -570,7 +570,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
     -- local names = ["", "", "", "", "", "", "", "", "ﭮ", "", "", "﨣", "F1", "F2", "F3", "F4", "F5"]
     -- local names = { " ", " ", " ", " ", " ", " ", " ", " ", " "  }
     -- Set workspace names
-    local names = { "  ", " ", "  ", "  ", "  ", "  ", "  ", " ", "  " }
+    local names = { "", " ", " ", " ", " ", "󰝚 ", "󰙯 ", " ", " " }
     local l = awful.layout.suit
     local layouts = { l.max, l.tile.right, l.tile.right, l.max, l.tile.right, l.tile.right, l.tile.right, l.floating, l.floating, }
     awful.tag(names, s, layouts)
@@ -597,7 +597,7 @@ local mytextclock = wibox.container.background(mytextclock, theme.seperator_1, g
        buttons   = awful.util.taglist_buttons,
        style     = {
           font     = font.taglist,      
-          spacing  = 0,
+          spacing  = 2,
        },
     }
 
