@@ -12,7 +12,6 @@ local awful   = require("awful")
 local wibox   = require("wibox")
 local dpi     = require('beautiful').xresources.apply_dpi
 local os      = { getenv = os.getenv, setlocale = os.setlocale }
-local gpmdp   = require("widgets.gpmdp")
 local awesome, client = awesome, client
 
 -- Imports some widgets from init.lua
