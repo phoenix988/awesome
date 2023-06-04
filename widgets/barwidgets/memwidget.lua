@@ -5,7 +5,7 @@ local wibox   = require("wibox")
 local var     = require("themes.default.variables")
 
 local chosen_theme  = require("activate_theme")
-local theme         = require("themes/" .. chosen_theme .. "/color")
+local theme         = require("themes/" .. chosen_theme.chosen_theme .. "/color")
 
 local font  = require("themes.default.font")
 
@@ -16,7 +16,7 @@ local widget       = {}
 -- Makes the memory widget
    local memorybar = wibox.widget {
        forced_height    = 1,
-       forced_width     = 100,
+       forced_width     = var.bar_width,
        color            = theme.fg_mem,
        background_color = theme.bg_normal,
        margins          = 1,

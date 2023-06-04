@@ -6,11 +6,21 @@
 -- All theme use the same widget layout just the colors are diffrent
 -- And maybe some icons
 
+local theme = {}
 --{{ Dracula
 -- Rose-pine
 -- Nord
 -- Iceberg
 -- Tokyo-night}}
-local chosen_theme  = "iceberg"
 
-return chosen_theme
+-- Color scheme
+theme.chosen_theme  = "iceberg"
+
+-- Widget layout
+--{{ default
+-- short}}
+
+
+theme.chosen_widget = "default"
+
+return theme

@@ -22,6 +22,8 @@ local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local gpmdp	    = require("widgets.gpmdp")
 
+local theme         = require("activate_theme")
+
 -- }}}
 
 -- {{{ Error handling
@@ -62,7 +64,7 @@ run_once({ "unclutter -root" }) -- entries must be comma-separated
 
 -- {{{ Variable definitions
 -- Choose your theme of widgets here
-local chosen_theme = "default"
+local chosen_theme = theme.chosen_widget
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "kitty"

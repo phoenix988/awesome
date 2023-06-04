@@ -12,6 +12,7 @@ local awful   = require("awful")
 local wibox   = require("wibox")
 local dpi     = require('beautiful').xresources.apply_dpi
 local os      = { getenv = os.getenv, setlocale = os.setlocale }
+local gpmdp   = require("widgets.gpmdp")
 local awesome, client = awesome, client
 
 -- Imports some widgets from init.lua
@@ -49,7 +50,7 @@ local mylauncher  = init.launcher
 
 -- Imports the colors to use
 local theme       = require("activate_theme")
-local theme       = require("themes/" .. theme .. "/color")
+local theme         = require("themes/" .. theme.chosen_theme .. "/color")
 
 -- Imports update widget
 local updatewidget = init.updatewidget

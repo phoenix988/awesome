@@ -3,7 +3,7 @@ local awful = require("awful")
 local gears = require("gears")
 
 local chosen_theme  = require("activate_theme")
-local theme         = require("themes/" .. chosen_theme .. "/color")
+local theme         = require("themes/" .. chosen_theme.chosen_theme .. "/color")
 
 -- Menu system where you can launch applications using a menu
 local mylauncher = awful.widget.button({image = theme.awesome_icon})

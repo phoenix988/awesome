@@ -5,16 +5,17 @@ local wibox   = require("wibox")
 local var     = require("themes.default.variables")
 
 local chosen_theme  = require("activate_theme")
-local theme         = require("themes/" .. chosen_theme .. "/color")
+local theme         = require("themes/" .. chosen_theme.chosen_theme .. "/color")
 
 local font  = require("themes.default.font")
 
 local markup       = lain.util.markup
 
+local widget       = {}
 -- ALSA volume bar
    local volicon = wibox.widget.textbox()
    theme.volume = lain.widget.alsabar({
-       width = 120, border_width = 0, ticks = true, ticks_size = 13,
+       width = var.bar_width_vol, border_width = 0, ticks = true, ticks_size = 13,
        notification_preset = { font = theme.font },
        --togglechannel = "IEC958,3",
        settings = function()
@@ -60,11 +61,9 @@ local markup       = lain.util.markup
    local volumebg = wibox.container.background(theme.volume.bar, "#474747", gears.shape.rectangle)
    local volumewidget = wibox.container.margin(volumebg, table.unpack(var.bar_size))
    
-   local volumewidget = wibox.container.background(volumewidget, theme.seperator_2 , gears.shape.rectangle)
+   widget.volumewidget = wibox.container.background(volumewidget, theme.seperator_2 , gears.shape.rectangle)
    local volicon = wibox.container.margin(volicon, 2, 7, 2, 2)
-   local volicon = wibox.container.background(volicon, theme.seperator_2 , gears.shape.rectangle)
+   widget.volicon = wibox.container.background(volicon, theme.seperator_2 , gears.shape.rectangle)
 -- volume widget end
 
-
-return { volumewidget = volumewidget,
-         volicon   = volicon}
+return widget

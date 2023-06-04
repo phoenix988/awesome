@@ -5,7 +5,7 @@ local wibox   = require("wibox")
 local var     = require("themes.default.variables")
 
 local chosen_theme  = require("activate_theme")
-local theme         = require("themes/" .. chosen_theme .. "/color")
+local theme         = require("themes/" .. chosen_theme.chosen_theme .. "/color")
 
 local font  = require("themes.default.font")
 
@@ -64,7 +64,7 @@ local batupd = lain.widget.bat({
     end
 })
 local batbg = wibox.container.background(batbar, "#474747", gears.shape.rectangle)
-widget.batwidget = wibox.container.margin(batbg, 2, 7, 4, 4)
+widget.batwidget = wibox.container.margin(batbg, table.unpack(var.bar_size))
 
 widget.baticon = wibox.container.margin(baticon, 0,0, 3, 0)
 -- bat widget end

@@ -5,7 +5,7 @@ local wibox   = require("wibox")
 local var     = require("themes.default.variables")
 
 local chosen_theme  = require("activate_theme")
-local theme         = require("themes/" .. chosen_theme .. "/color")
+local theme         = require("themes/" .. chosen_theme.chosen_theme .. "/color")
 
 local font  = require("themes.default.font")
 
@@ -23,7 +23,7 @@ local widget = {}
    
    local cpubar = wibox.widget {
        forced_height    = 1,
-       forced_width     = 100,
+       forced_width     = var.bar_width,
        color            = theme.fg_cpu,
        background_color = theme.bg_normal,
        margins          = 1,
@@ -41,7 +41,7 @@ local widget = {}
        end
    })
 
-   local  cpubg = wibox.container.background(cpubar, "#474747", gears.shape.rectangle)
+   local cpubg = wibox.container.background(cpubar, "#474747", gears.shape.rectangle)
    local cpuwidget = wibox.container.margin(cpubg, table.unpack(var.bar_size))
    
    -- makes the colour of the cpu widget
@@ -70,7 +70,7 @@ local widget = {}
 -- Make temp widget  
    local tempbar = wibox.widget {
        forced_height    = 5,
-       forced_width     = 60,
+       forced_width     = var.bar_width_temp,
        color            = theme.fg_cpu,
        background_color = theme.bg_normal,
        margins          = 1,

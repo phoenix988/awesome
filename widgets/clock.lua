@@ -3,7 +3,7 @@ local lain  = require("lain")
 local gears = require("gears")
 
 local chosen_theme  = require("activate_theme")
-local theme         = require("themes/" .. chosen_theme .. "/color")
+local theme         = require("themes/" .. chosen_theme.chosen_theme .. "/color")
 
 local markup       = lain.util.markup
 local font         = require("themes.default.font")
