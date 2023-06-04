@@ -61,6 +61,7 @@ run_once({ "unclutter -root" }) -- entries must be comma-separated
 -- }}}
 
 -- {{{ Variable definitions
+-- Choose your theme of widgets here
 local chosen_theme = "default"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
@@ -257,14 +258,28 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, }, "Right",  awful.tag.viewnext,
               {description = "view next", group = "tag"}),
     awful.key({ modkey, }, "Escape", awful.tag.history.restore,
-              {description = "go back", group = "tag"}),
-	
-	-- Tag browsing keyboard
-	awful.key({ modkey, altkey, "Control" }, "h",   awful.tag.viewprev,
-              {description = "view previous", group = "tag"}),
-        awful.key({ modkey, altkey, "Control" }, "l",  awful.tag.viewnext,
-              {description = "view next", group = "tag"}),
+             {description = "go back", group = "tag"}),
+       
+    -- Tag browsing keyboard
+    awful.key({ modkey, altkey, "Control" }, "h",   awful.tag.viewprev,
+          {description = "view previous", group = "tag"}),
+    awful.key({ modkey, altkey, "Control" }, "l",  awful.tag.viewnext,
+          {description = "view next", group = "tag"}),
 
+    -- Switch between workspaces on all monitors
+    awful.key({ modkey, "Control"   }, ",", 
+      function()
+        for i = 1, screen.count() do
+          awful.tag.viewprev(screen[i])
+        end
+      end ),
+    
+    awful.key({ modkey, "Control"   }, ".", 
+      function()
+        for i = 1, screen.count() do
+          awful.tag.viewnext(screen[i])
+        end
+      end ),
 
     -- Default client focus
     awful.key({ modkey, }, "j",
@@ -347,7 +362,7 @@ globalkeys = awful.util.table.join(
               {description = "quit awesome", group = "awesome"}),
     awful.key({ altkey, "Control"}, "l", function() awful.spawn("slock") end,
               {description = "lock the screen", group = "awesome"}),
---	awful.key({ modkey, "Shift"   }, "q", function () awful.util.spawn_with_shell("oblogout") end),
+-- awful.key({ modkey, "Shift"   }, "q", function () awful.util.spawn_with_shell("oblogout") end),
 
     awful.key({ modkey, "Control"   }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
