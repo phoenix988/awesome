@@ -50,7 +50,7 @@ local mylauncher  = init.launcher
 
 -- Imports the colors to use
 local theme       = require("activate_theme")
-local theme       = require("themes/" .. theme.chosen_theme .. "/color")
+local theme         = require("themes/" .. theme.chosen_theme .. "/color")
 
 -- Imports update widget
 local updatewidget = init.updatewidget
@@ -183,7 +183,7 @@ theme.tasklist_plain_task_name  = var.tasklist_plain_task_name
             seperator.first_sec,
             {
             {seperator.linuxicon,
-             bottom = 2,kt Trv
+             bottom = 2,
              color  = theme.fg_icon,
              widget = wibox.container.margin,
             },
