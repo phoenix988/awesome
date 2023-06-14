@@ -276,7 +276,7 @@ theme.tasklist_plain_task_name  = var.tasklist_plain_task_name
             },
             powerline.sep_3,
             {
-            {fs.fsicon,
+            {bat.baticon,
              bottom = 2,
              color  = theme.fg_focus,
              widget = wibox.container.margin,
@@ -286,7 +286,7 @@ theme.tasklist_plain_task_name  = var.tasklist_plain_task_name
              layout = wibox.container.margin,
             },
             {
-            {fs.fswidget,
+            {bat.batwidget,
              bottom = 2,
              color  = theme.fg_focus,
              widget = wibox.container.margin,

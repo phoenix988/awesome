@@ -7,7 +7,7 @@ local theme = require("activate_theme")
 
 local var = {}
 
-if theme.chosen_widget == "short" then
+if theme.chosen_widget == "laptop" then
 
   var.bar_size       = {2, 7, 7, 7}
   var.bar_width      = 70
