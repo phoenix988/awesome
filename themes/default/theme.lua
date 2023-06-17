@@ -19,43 +19,17 @@ local awesome, client = awesome, client
 local theme         = require("activate_theme")
 local theme         = require("themes/" .. theme.chosen_theme .. "/color")
 
+local chosen_widget = require("activate_theme")
+
 -- Imports some widgets from init.lua
 local init        = require("widgets.init")
+init.kernelwidget = kernelwidget
 
 -- Imports my fonts
 local font        = require("themes.default.font")
 
 -- Custom tasklist with class names as titles
 local mytasklist  = require("widgets.mytasklist")
-
-local mytextclock = init.clock
-
--- Imports fs widget
-local fs          = init.fs
-
--- Imports cpu widget
-local cpu         = init.cpu
-
--- Imports volume widget
-local vol         = init.vol
-
--- Imports Memory widget
-local mem         = init.mem
-
--- Imports seperators
-local powerline   = init.pow
-local seperator   = init.sep
-
--- Import batwidget
-local bat         = init.bat
-
--- App launcher
-local mylauncher  = init.launcher
-
-
--- Imports update widget
-local updatewidget = init.updatewidget
-local updateicon   = init.updateicon
 
 -- imports variables
 local var     = require("themes.default.variables")
@@ -141,196 +115,25 @@ theme.tasklist_plain_task_name  = var.tasklist_plain_task_name
     bg = theme.bg_normal, 
     fg = theme.fg_normal, 
     })
+    
+    -- Creates the diffrent styles of wibars
+    if chosen_widget.chosen_widget == "default" then
+        -- Add widgets to the wibox
+        local mywibar = require("widgets.wibar.wibox_default")
+        
+        -- Create the wibar 
+        mywibar.create(s,wibox,init,theme)
+    elseif chosen_widget.chosen_widget == "laptop" then
 
-    -- Add widgets to the wibox
-    s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            seperator.first_main,
-            mylauncher,
-            powerline.sep_right,
-            layout = wibox.layout.fixed.horizontal,
-            seperator.first_sec,
-            s.mylayoutbox,
-            seperator.first_sec,
-            seperator.first,
-            {
-            {s.mytaglist,
-             bottom = 2,
-             color  = theme.fg_normal,
-             widget = wibox.container.margin,
-            },
-             left  = 0,
-             right = 0,
-             layout = wibox.container.margin,
-            },
-            s.mypromptbox,
-            seperator.first_sec,
-            seperator.first_sec,
-        },
-          -- Middle widget
-            s.mytasklist,
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            seperator.first_sec,
-            seperator.first_sec,
-            powerline.sep_1,
-            mytextclock,
-            seperator.clock_sep,
-            updateicon,
-            updatewidget,
-            seperator.clock_sep,
-            powerline.sep_2,
-            seperator.first_sec,
-            {
-            {seperator.linuxicon,
-             bottom = 2,
-             color  = theme.fg_icon,
-             widget = wibox.container.margin,
-            },
-             left  = 0,
-             right = 0,
-             layout = wibox.container.margin,
-            },
-            {
-            {seperator.small_spr,
-             bottom = 2,
-             color  = theme.fg_icon,
-             widget = wibox.container.margin,
-            },
-             left  = 0,
-             right = 0,
-             layout = wibox.container.margin,
-            },
-            {
-            {kernelwidget,
-             bottom = 2,
-             color  = theme.fg_icon,
-             widget = wibox.container.margin,
-            },
-             left  = 0,
-             right = 0,
-             layout = wibox.container.margin,
-            },
-            seperator.first_sec,
-            {
-            {mem.memicon,
-             bottom = 2,
-             color  = theme.fg_mem,
-             widget = wibox.container.margin,
-            },
-             left  = 0,
-             right = 0,
-             layout = wibox.container.margin,
-            },
-            {
-            {mem.memorywidget,
-             bottom = 2,
-             color  = theme.fg_mem,
-             widget = wibox.container.margin,
-            },
-             left  = 0,
-             right = 0,
-             layout = wibox.container.margin,
-            },
-            powerline.sep_4,
-            {
-            {cpu.cpuicon,
-             bottom = 2,
-             color  = theme.fg_cpu,
-             widget = wibox.container.margin,
-            },
-             left  = 0,
-             right = 0,
-             layout = wibox.container.margin,
-            },
-            {
-            {cpu.cpuwidget,
-             bottom = 2,
-             color  = theme.fg_cpu,
-             widget = wibox.container.margin,
-            },
-             left  = 0,
-             right = 0,
-             layout = wibox.container.margin,
-            },
-            {
-            {cpu.tempicon,
-             bottom = 2,
-             color  = theme.fg_cpu,
-             widget = wibox.container.margin,
-            },
-             left  = 0,
-             right = 0,
-             layout = wibox.container.margin,
-            },
-            {
-            {cpu.tempwidget,
-             bottom = 2,
-             color  = theme.fg_cpu,
-             widget = wibox.container.margin,
-            },
-             left  = 0,
-             right = 0,
-             layout = wibox.container.margin,
-            },
-            powerline.sep_3,
-            {
-            {fs.fsicon,
-             bottom = 2,
-             color  = theme.fg_focus,
-             widget = wibox.container.margin,
-            },
-             left  = 0,
-             right = 0,
-             layout = wibox.container.margin,
-            },
-            {
-            {fs.fswidget,
-             bottom = 2,
-             color  = theme.fg_focus,
-             widget = wibox.container.margin,
-            },
-             left  = 0,
-             right = 0,
-             layout = wibox.container.margin,
-            },
-            powerline.sep_4,
-            {
-            {vol.volicon,
-             bottom = 2,
-             color  = theme.fg_alt,
-             widget = wibox.container.margin,
-            },
-             left  = 0,
-             right = 0,
-             layout = wibox.container.margin,
-            },
-            {
-            {vol.volumewidget,
-             bottom = 2,
-             color  = theme.fg_alt,
-             widget = wibox.container.margin,
-            },
-             left  = 0,
-             right = 0,
-             layout = wibox.container.margin,
-            },
-            powerline.sep_3,
-            seperator.first_sec,
-            {
-            {wibox.widget.systray(),
-             bottom = 4,
-             top    = 6,
-             color  = theme.bg_normal,
-             widget = wibox.container.margin,
-            },
-             left  = 3,
-             right = -2,
-             layout = wibox.container.margin,
-            },
-        },
-    }
+        -- Create wibar thats made for laptops in mind
+        local mywibar = require("widgets.wibar.wibox_laptop")
+
+        -- Create the wibar 
+        mywibar.create(s,wibox,seperator,powerline,mylauncher,
+                   mytextclock,updateicon,updatewidget,mem,cpu,
+                   bat,vol,kernelwidget,theme)
+
+    end
 
 end
 

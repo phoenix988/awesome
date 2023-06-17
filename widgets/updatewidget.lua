@@ -3,7 +3,7 @@ local awful = require("awful")
 local lain  = require("lain")
 local gears = require("gears")
 local font  = require("themes.default.font")
-local var     = require("themes.default.variables")
+local var   = require("themes.default.variables")
 
 local chosen_theme  = require("activate_theme")
 local theme         = require("themes/" .. chosen_theme.chosen_theme .. "/color")
