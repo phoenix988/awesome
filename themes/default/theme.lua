@@ -38,16 +38,23 @@ local markup  = var.markup
 -- Sets some global variables
 theme.tasklist_font             = var.tasklist_font
 theme.tasklist_plain_task_name  = var.tasklist_plain_task_name
+    
+    -- Create mem text widget
+    init.mem_text = lain.widget.mem({
+        settings = function()
+            widget:set_markup("<span foreground='" .. theme.fg_mem.. "' font='" .. font.mem .. "'>" .. mem_now.used .. "/" .. mem_now.total .. "</span>")
+        end
+    })
   
-   -- Eminent-like task filtering
-   local orig_filter = awful.widget.taglist.filter.all
-   
-   -- Taglist label functions
-   awful.widget.taglist.filter.all = function (t, args)
-       if t.selected or #t:clients() > 0 then
-           return orig_filter(t, args)
-       end
-   end
+    -- Eminent-like task filtering
+    local orig_filter = awful.widget.taglist.filter.all
+    
+    -- Taglist label functions
+    awful.widget.taglist.filter.all = function (t, args)
+        if t.selected or #t:clients() > 0 then
+            return orig_filter(t, args)
+        end
+    end
 
     function theme.at_screen_connect(s)
     -- Quake application
@@ -91,17 +98,68 @@ theme.tasklist_plain_task_name  = var.tasklist_plain_task_name
     -- Create a tasklist widget
     --s.mytasklist = mytasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
-    s.mytasklist = mytasklist {
+    --s.mytasklist = mytasklist {
+    --    screen   = s,
+    --    filter   = function(c, scr)
+    --        return awful.widget.tasklist.filter.currenttags(c, scr) and c == client.focus
+    --    end,
+    --    buttons  = awful.util.tasklist_buttons,
+    --    template = {
+    --        -- Your template configuration here
+    --    },
+    --}
+
+    s.mytasklist = awful.widget.tasklist {
         screen   = s,
-        filter   = function(c, scr)
-            return awful.widget.tasklist.filter.currenttags(c, scr) and c == client.focus
-        end,
+        filter   = awful.widget.tasklist.filter.currenttags,
         buttons  = awful.util.tasklist_buttons,
-        template = {
-            -- Your template configuration here
+        style    = {
+            shape_border_width = 1,
+            shape_border_color = theme.fg_normal,
+            shape  = gears.shape.rectangle,
+        },
+        layout   = {
+            spacing = 20,
+            spacing_widget = {
+                {
+                    forced_width = 20,
+                    forced_height = 20,
+                    shape        =  gears.shape.ellipse,
+                    widget       = wibox.widget.separator
+                },
+                valign = 'center',
+                halign = 'center',
+                widget = wibox.container.place,
+            },
+            layout  = wibox.layout.flex.horizontal
+        },
+        -- Notice that there is *NO* wibox.wibox prefix, it is a template,
+        -- not a widget instance.
+        widget_template = {
+            {
+                {
+                    {
+                        {
+                            id     = 'icon_role',
+                            widget = wibox.widget.imagebox,
+                        },
+                        margins = 10,
+                        widget  = wibox.container.margin,
+                    },
+                    {
+                        id     = 'text_role',
+                        widget = wibox.widget.textbox,
+                    },
+                    layout = wibox.layout.fixed.horizontal,
+                },
+                left  = 10,
+                right = 10,
+                widget = wibox.container.margin
+            },
+            id     = 'background_role',
+            widget = wibox.container.background,
         },
     }
-        
     -- Makes systray widget
     s.systray = wibox.widget.systray()
     s.systray:set_base_size(29)
@@ -109,7 +167,7 @@ theme.tasklist_plain_task_name  = var.tasklist_plain_task_name
     -- Create the horizontal wibox
     s.mywibox = awful.wibar({ 
     position = "top", 
-    screen = s, 
+    screen = s,
     height = 35, 
     border_width = 10,
     bg = theme.bg_normal, 
@@ -118,11 +176,16 @@ theme.tasklist_plain_task_name  = var.tasklist_plain_task_name
     
     -- Creates the diffrent styles of wibars
     if chosen_widget.chosen_widget == "default" then
-        -- Add widgets to the wibox
+
         local mywibar = require("widgets.wibar.wibox_default")
-        
-        -- Create the wibar 
-        mywibar.create(s,wibox,init,theme)
+        if s.index == 1 then
+        -- Add widgets to the wibox
+           -- Create the wibar
+           mywibar.create(s,wibox,init,theme)
+        else
+           mywibar.create_sec(s,wibox,init,theme)
+        end
+
     elseif chosen_widget.chosen_widget == "laptop" then
 
         -- Create wibar thats made for laptops in mind

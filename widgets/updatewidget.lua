@@ -24,7 +24,7 @@ local update_command = var.update_command
 
    -- Update icon
    updateicon =  wibox.widget {
-       markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. font.update .. "'>⟳</span>",
+       markup = "<span foreground='" .. theme.bg_normal .. "' font='" .. font.update .. "'> </span>",
        widget = wibox.widget.textbox
    }
    

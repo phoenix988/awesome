@@ -1,8 +1,7 @@
     
 --[[
 
-     Awesome WM configuration template
-     github.com/copycat-killer
+     Awesome WM configuration by Karl 
 
 --]]
 
@@ -23,6 +22,7 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 local gpmdp	    = require("widgets.gpmdp")
 
 local theme         = require("activate_theme")
+local var           = require("themes.default.variables")
 
 -- }}}
 
@@ -524,20 +524,13 @@ globalkeys = awful.util.table.join(
     awful.key({ altkey, "Shift" }, "v", function () awful.spawn("xsel -b | xsel") end),
 
     -- User programs
---    awful.key({ modkey }, "q", function () awful.spawn(browser) end),
     awful.key({ modkey, "Shift" }, "a", function () awful.spawn(guieditor) end),
 
     -- Default
     -- Menubar
     awful.key({ modkey }, "a", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"}),
-    
-    -- dmenu
---    awful.key({ altkey }, "x", function ()
---        awful.spawn(string.format("dmenu_run -i -fn 'Monospace' -nb '%s' -nf '%s' -sb '%s' -sf '%s'",
---        beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus)),
---		end)
-    
+
     -- Prompt
     awful.key({ modkey }, "r", function () awful.util.spawn("rofi -show drun -show-icons -display-drun '' -drun-display-format \'{name}\'") end,
 
@@ -675,25 +668,25 @@ awful.rules.rules = {
 --      properties = { titlebars_enabled = true } },
 
     { rule = { class = "LibreWolf" },
-     properties = {tag = "" } },
+     properties = {tag = var.names[1] } },
 
     { rule = { class = "Steam" },
-     properties = {tag = "󰓓 " } },
+     properties = {tag = var.names[4] } },
 
     { rule = { class = "Gimp" },
-          properties = { tag = " " } },
+          properties = { tag = var.names[9] } },
 
     { rule = { class = "kdenlive" },
-          properties = { tag = " " } },
+          properties = { tag = var.names[9] } },
 
     { rule = { class = "youtube.com" },
-        properties = { screen = 1, tag = "󰝚 " } },
+        properties = { screen = 1, tag = var.names[6] } },
 
     { rule = { class = "whatsapp-nativefier-d40211" },
-        properties = { tag = "󰙯 " } },
+        properties = { tag = var.names[7] } },
     
     { rule = { class = "discord" },
-        properties = { tag = "󰙯 " } },
+        properties = { tag = var.names[7] } },
        
 
          { rule = { class = "Yad" },
