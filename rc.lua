@@ -1,7 +1,7 @@
     
 --[[
 
-     Awesome WM configuration by Karl 
+     Awesome WM configuration template
 
 --]]
 
@@ -104,40 +104,40 @@ awful.util.taglist_buttons = awful.util.table.join(
                     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
                 )
 awful.util.tasklist_buttons = awful.util.table.join(
-                     awful.button({ }, 1, function (c)
-                                              if c == client.focus then
-                                                  c.minimized = true
-                                              else
-                                                  -- Without this, the following
-                                                  -- :isvisible() makes no sense
-                                                  c.minimized = false
-                                                  if not c:isvisible() and c.first_tag then
-                                                      c.first_tag:view_only()
-                                                  end
-                                                  -- This will also un-minimize
-                                                  -- the client, if needed
-                                                  client.focus = c
-                                                  c:raise()
-                                              end
-                                          end),
-                     awful.button({ }, 3, function()
-                         local instance = nil
+                    awful.button({ }, 1, function (c)
+                                             if c == client.focus then
+                                                 c.minimized = true
+                                             else
+                                                 -- Without this, the following
+                                                 -- :isvisible() makes no sense
+                                                 c.minimized = false
+                                                 if not c:isvisible() and c.first_tag then
+                                                     c.first_tag:view_only()
+                                                 end
+                                                 -- This will also un-minimize
+                                                 -- the client, if needed
+                                                 client.focus = c
+                                                 c:raise()
+                                             end
+                                         end),
+                    awful.button({ }, 3, function()
+                        local instance = nil
 
-                         return function ()
-                             if instance and instance.wibox.visible then
-                                 instance:hide()
-                                 instance = nil
-                             else
-                                 instance = awful.menu.clients({ theme = { width = 250 } })
-                             end
-                        end
-                     end),
-                     awful.button({ }, 4, function ()
-                                              awful.client.focus.byidx(1)
-                                          end),
-                     awful.button({ }, 5, function ()
-                                              awful.client.focus.byidx(-1)
-                                          end))
+                        return function ()
+                            if instance and instance.wibox.visible then
+                                instance:hide()
+                                instance = nil
+                            else
+                                instance = awful.menu.clients({ theme = { width = 250 } })
+                            end
+                       end
+                    end),
+                    awful.button({ }, 4, function ()
+                                             awful.client.focus.byidx(1)
+                                         end),
+                    awful.button({ }, 5, function ()
+                                             awful.client.focus.byidx(-1)
+                                         end))
 
 lain.layout.termfair.nmaster           = 3
 lain.layout.termfair.ncol              = 1
@@ -149,6 +149,7 @@ lain.layout.cascade.tile.extra_padding = 5
 lain.layout.cascade.tile.nmaster       = 5
 lain.layout.cascade.tile.ncol          = 2
 
+-- Loads the theme
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
 beautiful.init(theme_path)
 -- }}}
@@ -161,6 +162,7 @@ local myawesomemenu = {
     { "restart", awesome.restart },
     { "quit", function() awesome.quit() end }
 }
+
 awful.util.mymainmenu = freedesktop.menu.build({
     icon_size = beautiful.menu_height or 16,
     before = {
@@ -172,6 +174,7 @@ awful.util.mymainmenu = freedesktop.menu.build({
         -- other triads can be put here
     }
 })
+
 --menubar.utils.terminal = terminal -- Set the Menubar terminal for applications that require it
 -- }}}
 
@@ -364,11 +367,9 @@ globalkeys = awful.util.table.join(
               {description = "quit awesome", group = "awesome"}),
     awful.key({ altkey, "Control"}, "l", function() awful.spawn("slock") end,
               {description = "lock the screen", group = "awesome"}),
--- awful.key({ modkey, "Shift"   }, "q", function () awful.util.spawn_with_shell("oblogout") end),
-
-    awful.key({ modkey, "Control"   }, "l",     function () awful.tag.incmwfact( 0.05)          end,
+    awful.key({ modkey, "Control"   }, "l",     function () awful.tag.incmwfact( 0.05)        end,
               {description = "increase master width factor", group = "layout"}),
-    awful.key({ modkey, "Control"   }, "h",     function () awful.tag.incmwfact(-0.05)          end,
+    awful.key({ modkey, "Control"   }, "h",     function () awful.tag.incmwfact(-0.05)        end,
               {description = "decrease master width factor", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
@@ -378,12 +379,12 @@ globalkeys = awful.util.table.join(
               {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
-    awful.key({ modkey,           }, "Tab", function () awful.layout.inc( 1)                end,
+    awful.key({ modkey,           }, "Tab", function () awful.layout.inc( 1)                  end,
               {description = "select next", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "Tab", function () awful.layout.inc(-1)                end,
+    awful.key({ modkey, "Shift"   }, "Tab", function () awful.layout.inc(-1)                  end,
               {description = "select previous", group = "layout"}),
 
--- tmux bindings
+    -- tmux bindings
     awful.key({ altkey, }, "1", function () awful.spawn( home .. "/.scripts/tmux/window-1" ) end),
     awful.key({ altkey, }, "2", function () awful.spawn( home .. "/.scripts/tmux/window-2" ) end),
     awful.key({ altkey, }, "3", function () awful.spawn( home .. "/.scripts/tmux/window-3" ) end),
@@ -395,7 +396,7 @@ globalkeys = awful.util.table.join(
     awful.key({ altkey, }, "9", function () awful.spawn( home .. "/.scripts/tmux/window-9" ) end),
     
 
-    
+    -- Dmenu bindings
     awful.key({ altkey }, "e", function () awful.util.spawn(home .. "/.dmenu/dm-editconfig") end,
               {description = "run dm-editconfig", group = "dmenu"}),
     awful.key({ altkey }, "v", function () awful.util.spawn(home .. "/.dmenu/dm-vpn") end,
@@ -423,9 +424,10 @@ globalkeys = awful.util.table.join(
     awful.key({ altkey }, "g", function () awful.util.spawn(home .. "/.dmenu/dm-theme") end,
               {description = "run dm-theme", group = "dmenu"}),
               
-    -- switch layout
+    -- switch keyboard layout
     awful.key({ modkey, }, "space", function () awful.spawn( home .. "/.scripts/activated/layout-switcher" ) end),
-
+    
+    -- Restore minimized window
     awful.key({ modkey, "Control" }, "n",
               function ()
                   local c = awful.client.restore()
@@ -557,7 +559,7 @@ clientkeys = awful.util.table.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
-    awful.key({ modkey, }, "q",      function (c) c:kill()                         end,
+    awful.key({ modkey, }, "q",      function (c) c:kill()                                   end,
               {description = "close", group = "client"}),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
@@ -607,7 +609,7 @@ for i = 1, 9 do
                       end
                   end,
                   {description = "toggle tag #" .. i, group = "tag"}),
-        -- Move client to tag.
+        -- Move client to tag.          
         awful.key({ modkey, "Shift" }, "#" .. i + 9,
                   function ()
                       if client.focus then
@@ -664,35 +666,34 @@ awful.rules.rules = {
 
     -- Titlebars
     { rule_any = { type = { "dialog", "normal" } },
-      properties = { titlebars_enabled = false } },
---      properties = { titlebars_enabled = true } },
+              properties = { titlebars_enabled = false } },
+            --properties = { titlebars_enabled = true } },
 
     { rule = { class = "LibreWolf" },
-     properties = {tag = var.names[1] } },
+              properties = {tag = var.names[1] } },
 
     { rule = { class = "Steam" },
-     properties = {tag = var.names[4] } },
+              properties = {tag = var.names[4] } },
 
     { rule = { class = "Gimp" },
-          properties = { tag = var.names[9] } },
+              properties = { tag = var.names[9] } },
 
     { rule = { class = "kdenlive" },
-          properties = { tag = var.names[9] } },
+               properties = { tag = var.names[9] } },
 
     { rule = { class = "youtube.com" },
-        properties = { screen = 1, tag = var.names[6] } },
+               properties = { screen = 1, tag = var.names[6] } },
 
     { rule = { class = "whatsapp-nativefier-d40211" },
-        properties = { tag = var.names[7] } },
+               properties = { tag = var.names[7] } },
     
     { rule = { class = "discord" },
-        properties = { tag = var.names[7] } },
-       
+               properties = { tag = var.names[7] } },
 
-         { rule = { class = "Yad" },
+    { rule = { class = "Yad" },
                properties = { floating = true } },
 
-         { rule = { class = "Blueman-manager" },
+    { rule = { class = "Blueman-manager" },
                properties = { floating = true } },
 
 }
