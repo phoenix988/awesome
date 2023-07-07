@@ -23,6 +23,9 @@ local chosen_widget = require("activate_theme")
 
 -- Imports some widgets from init.lua
 local init        = require("widgets.init")
+local update      = require("widgets.functions.update")
+
+-- adds the kernelwidget to the init table
 init.kernelwidget = kernelwidget
 
 -- Imports my fonts
@@ -34,6 +37,9 @@ local mytasklist  = require("widgets.mytasklist")
 -- imports variables
 local var     = require("themes.default.variables")
 local markup  = var.markup
+
+-- Create update widget with icon
+init.update = update:create("arch",theme,font)
 
 -- Sets some global variables
 theme.tasklist_font             = var.tasklist_font
