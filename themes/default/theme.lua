@@ -35,11 +35,11 @@ local font        = require("themes.default.font")
 local mytasklist  = require("widgets.mytasklist")
 
 -- imports variables
-local var     = require("themes.default.variables")
-local markup  = var.markup
+local var         = require("themes.default.variables")
+local markup      = var.markup
 
 -- Create update widget with icon
-init.update = update:create("arch",theme,font)
+init.update = update:create("paru",theme,font)
 
 -- Sets some global variables
 theme.tasklist_font             = var.tasklist_font
