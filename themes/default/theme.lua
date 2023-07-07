@@ -191,7 +191,7 @@ theme.tasklist_plain_task_name  = var.tasklist_plain_task_name
         -- Create wibar thats made for laptops in mind
         local mywibar = require("widgets.wibar.wibox_laptop")
 
-        -- Create the wibar 
+        -- Create the wibar made for laptops or smaller res screens 
         mywibar.create(s,wibox,seperator,powerline,mylauncher,
                    mytextclock,updateicon,updatewidget,mem,cpu,
                    bat,vol,kernelwidget,theme)
