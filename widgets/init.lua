@@ -2,10 +2,7 @@
 local init = {}
 
 -- imports kernelwidgets
-require("widgets.kernelwidget")
-
--- Imports weather widget
-init.wea = require("widgets.weather")
+init.kernelwidget = require("widgets.kernelwidget")
 
 -- System monitor widgets
 init.cpu = require("widgets.barwidgets.cpuwidget")
@@ -21,11 +18,11 @@ init.sep = require("widgets.seperator.normal")
 -- Clock
 init.clock = require("widgets.clock")
 
-init.updatemodule = require("widgets.updatewidget")
-init.updatewidget = init.updatemodule.updatewidget
-init.updateicon   = init.updatemodule.updateicon
+-- Launcher
+init.launcher = require("widgets.launcher")
 
-init.launcher     = require("widgets.launcher")
+init.layoutWidget = require("widgets.functions.layout")
+init.update = require("widgets.updatewidget")
 
 return init
 
