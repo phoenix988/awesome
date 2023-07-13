@@ -35,8 +35,10 @@ local var         = require("themes.default.variables")
 local markup      = var.markup
 
 -- Create update widget with icon
--- init.update = init.updateWidget:create("arch",theme,font)
-init.layout = init.layoutWidget:create()
+init.update = init.update:create("arch",theme,font)
+
+-- Create layout widget
+--init.layout = init.layoutWidget:create()
 
 -- Sets some global variables
 theme.tasklist_font             = var.tasklist_font

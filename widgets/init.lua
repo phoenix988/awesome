@@ -21,8 +21,10 @@ init.clock = require("widgets.clock")
 -- Launcher
 init.launcher = require("widgets.launcher")
 
-init.layoutWidget = require("widgets.functions.layout")
-init.update = require("widgets.updatewidget")
+-- Custom widgets
+init.layouticon = require("widgets.layout").layouticon
+init.layoutwidget = require("widgets.layout").layoutwidget
+init.update = require("widgets.functions.update")
 
 return init
 

@@ -38,6 +38,15 @@ M.widget = wibox.container.background(M.updatewidget, theme.seperator_1, gears.s
 -- Setting some settings for the update icon widget
 M.updateicon = wibox.container.margin(M.updateicon, 0, 0, 4, 1)
 M.icon = wibox.container.background(M.updateicon, theme.seperator_1, gears.shape.rectangle)
+
+M.widget:connect_signal("button::press", function(_, _, _, button)
+    -- Perform some action when the widget is clicked
+    if button == 1 then
+       -- sets the available layouts to switch between when you click the widget
+       awful.spawn.with_shell(string.format("%s -e sudo pacman -Syyu", awful.util.terminal))
+    end
+end)
+
 -- Update widget end
 
 return M
