@@ -48,7 +48,7 @@ local function layout_switcher(...)
         
      local command = "setxkbmap " .. layouts[choice]
 
-     return command
+     return command, layouts[choice]
 end
 
 

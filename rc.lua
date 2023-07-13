@@ -80,12 +80,17 @@ local se,us,az     = "se","us","az"
 -- Function to switch layout
 local function layout_switch_run() 
     -- Gets the layout to switch
-    local switch = layout_switch(se, us, az)
+    local switch, choice = layout_switch(se, us, az)
     -- the command to run
     local command = "bash -c '" .. switch .. "'"
     
+    -- Format the output
+    local format = string.format("%s layout is selected", choice)
+
     -- runs the command
     awful.util.spawn(command)
+    
+    return format
 end
 
 awful.util.terminal = terminal
@@ -441,7 +446,7 @@ globalkeys = awful.util.table.join(
               
               
     -- switch keyboard layout
-    awful.key({ modkey, }, "space", function () awful.spawn(layout_switch_run()) end),
+    awful.key({ modkey, }, "space", function () naughty.notify({text = layout_switch_run()}) end),
     
     -- Restore minimized window
     awful.key({ modkey, "Control" }, "n",
