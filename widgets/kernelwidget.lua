@@ -15,7 +15,7 @@ local theme         = require("themes/" .. chosen_theme.chosen_theme .. "/color"
 local markup       = lain.util.markup
 
 -- Command to check for kernel version
-local kernel_command = "uname -r"
+local kernel_command = var.kernel_command
 
 -- Gets the current kernel version
 local kernelwidget = command(kernel_command)

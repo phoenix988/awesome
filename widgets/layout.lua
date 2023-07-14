@@ -18,17 +18,10 @@ local markup       = lain.util.markup
 local layout_command = "setxkbmap -query | grep layout | awk '{print $NF}'"
 
 -- layout uptions
-local se,us,az = "se","us","az"
+local layouts = awful.util.layouts
 
 -- function to switch to switch the layout
-local function layout_switcher(...)
-     local layouts = {}
-     
-     -- Makes the table
-     for i, arg in ipairs({...}) do
-         table.insert(layouts, arg)
-         last = i
-     end
+local function layout_switcher(layouts)
      
      local bash_command = "setxkbmap -query | grep layout | awk '{print $NF}'"
      local file = io.popen(bash_command)
@@ -38,6 +31,7 @@ local function layout_switcher(...)
          if value == output then
              choice = key
          end
+         last = key
      end
      
      if choice == nil then
@@ -97,7 +91,7 @@ layoutwidget:connect_signal("button::press", function(_, _, _, button)
     -- Perform some action when the widget is clicked
     if button == 1 then
        -- sets the available layouts to switch between when you click the widget
-       local switch, choice = layout_switcher(se, us, az)
+       local switch, choice = layout_switcher(layouts)
        awful.spawn("bash -c '" .. switch .. "'")
        changeText(choice)
     end
@@ -113,7 +107,7 @@ for key, value in pairs(N) do
     awful.tooltip {
         objects = { N[key] },
         timer_function = function()
-            return string.format("Activated: %s %s %s", se,us,az)   
+            return string.format("Activated: %s", table.unpack(layouts))   
         end
     }
 end
