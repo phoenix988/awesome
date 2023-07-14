@@ -24,6 +24,7 @@ local gpmdp	    = require("widgets.gpmdp")
 local theme         = require("activate_theme")
 local var           = require("themes.default.variables")
 local layout_switch = require("widgets.layout").layout_switcher
+local layout_update = require("widgets.layout").layout_update
 
 -- }}}
 
@@ -77,24 +78,32 @@ local browser      = "librewolf"
 local guieditor    = "emacsclient -c -a emacs"
 local se,us,az     = "se","us","az"
 
--- Function to switch layout
+-- Function to switch layout 
+-- When you change it using the keybinding
 local function layout_switch_run() 
     -- Gets the layout to switch
     local switch, choice = layout_switch(se, us, az)
-    -- the command to run
+    
+    -- command to switch the layout
     local command = "bash -c '" .. switch .. "'"
     
     -- Format the output
     local format = string.format("%s layout is selected", choice)
+    
+    -- Update the layotwidget
+    layout_update(choice)
 
-    -- runs the command
+    -- Finally we switch the layout using util.spawn
     awful.util.spawn(command)
     
+    -- Returns the selected layout
     return format
 end
 
+-- Packages the chosen terminal into the awful.util table
 awful.util.terminal = terminal
 
+-- Activate your layouts here
 awful.layout.layouts = {
     awful.layout.suit.spiral.dwindle,	--9
     awful.layout.suit.max,		--11
@@ -123,21 +132,21 @@ awful.util.taglist_buttons = awful.util.table.join(
                 )
 awful.util.tasklist_buttons = awful.util.table.join(
                     awful.button({ }, 1, function (c)
-                                             if c == client.focus then
-                                                 c.minimized = true
-                                             else
-                                                 -- Without this, the following
-                                                 -- :isvisible() makes no sense
-                                                 c.minimized = false
-                                                 if not c:isvisible() and c.first_tag then
-                                                     c.first_tag:view_only()
-                                                 end
-                                                 -- This will also un-minimize
-                                                 -- the client, if needed
-                                                 client.focus = c
-                                                 c:raise()
-                                             end
-                                         end),
+                                   if c == client.focus then
+                                       c.minimized = true
+                                   else
+                                       -- Without this, the following
+                                       -- :isvisible() makes no sense
+                                       c.minimized = false
+                                       if not c:isvisible() and c.first_tag then
+                                           c.first_tag:view_only()
+                                       end
+                                       -- This will also un-minimize
+                                       -- the client, if needed
+                                       client.focus = c
+                                       c:raise()
+                                   end
+                             end),
                     awful.button({ }, 3, function()
                         local instance = nil
 
