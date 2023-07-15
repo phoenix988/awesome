@@ -107,7 +107,9 @@ for key, value in pairs(N) do
     awful.tooltip {
         objects = { N[key] },
         timer_function = function()
-            return string.format("Activated: %s", table.unpack(layouts))   
+            local text 
+            local layoutwidget = command(layout_command)
+            return string.format("Activated: %s", layoutwidget)   
         end
     }
 end

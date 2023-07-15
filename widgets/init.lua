@@ -27,6 +27,7 @@ init.clock = require("widgets.clock")
 
 -- Launcher
 init.launcher = require("widgets.launcher")
+init.weather  = require("widgets.weather")
 
 -- Custom widgets
 init.layouticon = require("widgets.layout").layouticon

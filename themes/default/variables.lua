@@ -16,8 +16,8 @@ if theme.chosen_widget == "laptop" then
   var.bar_width_temp = 50
 else
   var.bar_size       = {2, 7, 7, 7}
-  var.bar_width      = 100
-  var.bar_width_vol  = 120
+  var.bar_width      = 80
+  var.bar_width_vol  = 100
   var.bar_width_temp = 60
 
 end
