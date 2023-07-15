@@ -44,13 +44,6 @@ init.update = init.update:create("arch",theme,font)
 theme.tasklist_font             = var.tasklist_font
 theme.tasklist_plain_task_name  = var.tasklist_plain_task_name
     
-    -- Create mem text widget
-    init.mem_text = lain.widget.mem({
-        settings = function()
-            widget:set_markup("<span foreground='" .. theme.fg_mem.. "' font='" .. font.mem .. "'>" .. mem_now.used .. "/" .. mem_now.total .. "</span>")
-        end
-    })
-  
     -- Eminent-like task filtering
     local orig_filter = awful.widget.taglist.filter.all
     
@@ -113,7 +106,8 @@ theme.tasklist_plain_task_name  = var.tasklist_plain_task_name
     --        -- Your template configuration here
     --    },
     --}
-
+    
+    -- Tasklist widget
     s.mytasklist = awful.widget.tasklist {
         screen   = s,
         filter   = awful.widget.tasklist.filter.currenttags,

@@ -113,9 +113,9 @@ local widget = {}
        tempfile = "/sys/class/thermal/thermal_zone0/hwmon4/temp1_input",
        settings = function()
            if coretemp_now >= threshold then
-               temp_text_setting:set_markup("<b><span foreground='" .. var.red .. "'>" .. coretemp_now .. "°C</span></b>")
+               temp_text_setting:set_markup("<b><span foreground='" .. var.red .. "'font='" .. font.mem .. "'>" .. coretemp_now .. "°C</span></b>")
            else
-               temp_text_setting:set_markup("<b><span foreground='" .. theme.fg_cpu .. "'>" .. coretemp_now .. "°C</span></b>")
+               temp_text_setting:set_markup("<b><span foreground='" .. theme.fg_cpu .. "'font='".. font.mem .. "'>" .. coretemp_now .. "°C</span></b>")
            end
        end
    })

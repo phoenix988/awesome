@@ -28,7 +28,7 @@ local kernelwidget = wibox.widget {
 
 -- Setting some settings for the update icon widget
 local kernelwidget = wibox.container.margin(kernelwidget, 0, 0, 4, 1)
-local kernelwidget = wibox.container.background(kernelwidget, theme.bg_normal, gears.shape.rectangle)
+local kernelwidget = wibox.container.background(kernelwidget, theme.seperator_2, gears.shape.rectangle)
 
 return kernelwidget
 
