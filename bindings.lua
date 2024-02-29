@@ -22,16 +22,14 @@ local layout_update = require("widgets.layout").layout_update
 -- {{{ Variable definitions
 local modkey = "Mod4"
 local altkey = "Mod1"
-
-local modkey = "Mod4"
-local altkey = "Mod1"
 local terminal = awful.util.terminal
 local terminal_alt = awful.util.terminal_alt
 local editor = awful.util.editor
 local layouts = awful.util.layouts
 local home = os.getenv("HOME")
 local gui_editor = "emacsclient -c -a emacs"
-local browser = "librewolf"
+local browser = "brave-browser-nightly"
+local browser_alt = "qutebrowser --backend webengine"
 -- }}}
 
 -- Function to update current layout plus the layout widget
@@ -145,7 +143,7 @@ globalkeys = awful.util.table.join(
         awful.util.spawn(browser)
     end, { description = "run browser", group = "Applications" }),
     awful.key({ modkey }, "b", function()
-        awful.util.spawn("qutebrowser --backend webengine")
+        awful.util.spawn(browser_alt)
     end, { description = "run qutebrowser", group = "Applications" }),
     awful.key({ modkey, "Shift" }, "v", function()
         awful.util.spawn("virt-manager")
@@ -329,31 +327,31 @@ globalkeys = awful.util.table.join(
 
     -- tmux bindings
     awful.key({ altkey }, "1", function()
-        awful.spawn(home .. "/.scripts/tmux/window-1")
+        awful.spawn("tmux select-window -t 1")
     end),
     awful.key({ altkey }, "2", function()
-        awful.spawn(home .. "/.scripts/tmux/window-2")
+        awful.spawn("tmux select-window -t 2")
     end),
     awful.key({ altkey }, "3", function()
-        awful.spawn(home .. "/.scripts/tmux/window-3")
+        awful.spawn("tmux select-window -t 3")
     end),
     awful.key({ altkey }, "4", function()
-        awful.spawn(home .. "/.scripts/tmux/window-4")
+        awful.spawn("tmux select-window -t 4")
     end),
     awful.key({ altkey }, "5", function()
-        awful.spawn(home .. "/.scripts/tmux/window-5")
+        awful.spawn("tmux select-window -t 5")
     end),
     awful.key({ altkey }, "6", function()
-        awful.spawn(home .. "/.scripts/tmux/window-6")
+        awful.spawn("tmux select-window -t 6")
     end),
     awful.key({ altkey }, "7", function()
-        awful.spawn(home .. "/.scripts/tmux/window-7")
+        awful.spawn("tmux select-window -t 7")
     end),
     awful.key({ altkey }, "8", function()
-        awful.spawn(home .. "/.scripts/tmux/window-8")
+        awful.spawn("tmux select-window -t 8")
     end),
     awful.key({ altkey }, "9", function()
-        awful.spawn(home .. "/.scripts/tmux/window-9")
+        awful.spawn("tmux select-window -t 9")
     end),
 
     -- Dmenu bindings
